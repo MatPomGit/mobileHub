@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programowanie Aplikacji Mobilnych - WIKI</title>
+    <title>PAM Wiki — Programowanie Aplikacji Mobilnych</title>
     <meta name="description" content="Baza wiedzy z Programowania Aplikacji Mobilnych. Android, iOS, Flutter, XR, IoT, Informatyka Afektywna, Gry Mobilne.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,7 +150,7 @@
         /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, #0d0f1a 0%, #1a1040 50%, #0d1a2e 100%);
-            padding: 60px 24px;
+            padding: 28px 24px 24px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -169,16 +169,16 @@
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(91,79,207,0.2); border: 1px solid rgba(91,79,207,0.4);
             color: #a78bfa; padding: 6px 16px; border-radius: 20px;
-            font-size: 12px; font-weight: 600; letter-spacing: 1px;
-            text-transform: uppercase; margin-bottom: 20px;
+            font-size: 11px; font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase; margin-bottom: 12px;
         }
 
         .hero h1 {
-            font-size: clamp(28px, 5vw, 52px);
+            font-size: clamp(20px, 3vw, 30px);
             font-weight: 800;
             color: #fff;
-            line-height: 1.1;
-            margin-bottom: 16px;
+            line-height: 1.15;
+            margin-bottom: 6px;
         }
         .hero h1 span {
             background: linear-gradient(90deg, #7c6df0, #06b6d4);
@@ -186,22 +186,9 @@
         }
 
         .hero-sub {
-            font-size: 16px; color: rgba(255,255,255,0.6);
-            max-width: 500px; margin: 0 auto 32px;
+            font-size: 13px; color: rgba(255,255,255,0.45);
+            max-width: 480px; margin: 0 auto;
         }
-
-        .hero-stats {
-            display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
-        }
-        .hero-stat {
-            text-align: center;
-        }
-        .hero-stat strong {
-            display: block; font-size: 28px; font-weight: 800;
-            background: linear-gradient(90deg, var(--accent), #06b6d4);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero-stat span { font-size: 12px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
 
         /* ===== LAYOUT ===== */
         .wiki-layout {
@@ -217,8 +204,8 @@
         .wiki-sidebar {
             border-right: 1px solid var(--border);
             background: var(--surface);
-            position: sticky; top: 64px;
-            height: calc(100vh - 64px);
+            position: sticky; top: 58px;
+            height: calc(100vh - 58px);
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: var(--border) transparent;
@@ -575,7 +562,7 @@
                     <i class="fa-solid fa-mobile-screen-button"></i>
                 </div>
                 <div class="header-title">
-                    <strong>WIKI</strong>
+                    <strong>PAM Wiki</strong>
                     <span>Programowanie Aplikacji Mobilnych</span>
                 </div>
             </div>
@@ -600,20 +587,7 @@
                 Kompendium wiedzy z 11 obszarów tematycznych — od natywnego Android/iOS
                 po XR, IoT, Informatykę Afektywną i Robotykę.
             </p>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <strong>13</strong>
-                    <span>Artykułów</span>
-                </div>
-                <div class="hero-stat">
-                    <strong>11</strong>
-                    <span>Kategorii</span>
-                </div>
-                <div class="hero-stat">
-                    <strong>100+</strong>
-                    <span>Przykładów kodu</span>
-                </div>
-            </div>
+
         </div>
     </section>
 
@@ -653,9 +627,9 @@
                 <div class="wiki-welcome">
                     <h2><i class="fa-solid fa-hand-sparkles"></i> Witamy w PAM Wiki</h2>
                     <p class="welcome-text">
-                        To kompendium wiedzy z przedmiotu <strong>Programowania Aplikacji Mobilnych</strong>
-                        (PAM) na Katedrze Informatyki i Automatyki Politechniki Rzeszowskiej.
-                        Wybierz artykuł z menu po lewej stronie lub kliknij skrót poniżej.
+                        To kompendium wiedzy z kursu <strong>Programowania Aplikacji Mobilnych</strong>
+                        (PAM) na Katedrze Informatyki Politechniki Rzeszowskiej. Obejmuje 11 obszarów
+                        tematycznych — wybierz artykuł z menu po lewej stronie lub kliknij skrót poniżej.
                     </p>
 
                     <div class="quick-start">
@@ -728,11 +702,11 @@
     <!-- FOOTER -->
     <footer>
         <p>
-            <strong>mobile Wiki</strong> — Programowanie Aplikacji Mobilnych ·
+            <strong>PAM Wiki</strong> — Programowanie Aplikacji Mobilnych · 49 artykułów ·
             Katedra Informatyki i Automatyki · Politechnika Rzeszowska
         </p>
         <p style="margin-top: 6px; font-size: 11px;">
-            dr inż. Mateusz Pomianek · <span style="opacity:0.4">v1.0</span>
+            dr inż. Mateusz Pomianek · <span style="opacity:0.4">v1.2</span>
         </p>
     </footer>
 
@@ -745,7 +719,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/xml.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/csharp.min.js"></script>
-    <script src="wiki.js"></script>
+    <script src="pam-wiki.js"></script>
 
     <script>
         // Mobile sidebar toggle
