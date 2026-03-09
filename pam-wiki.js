@@ -1,7 +1,7 @@
 /**
  * WIKI System - Programowanie Aplikacji Mobilnych (PAM)
  * Katedra Informatyki - Politechnika Rzeszowska
- * Version: 2.0
+ * Version: 2.1 — fix: poprawione klasy ikon Font Awesome (fa-brands vs fa-solid)
  */
 
 'use strict';
@@ -54,7 +54,7 @@ const ARTICLES = {
     'unity-advanced':       'wiki/unity-advanced.md',
     'game-physics':         'wiki/game-physics.md',
     'robotics-mobile':      'wiki/robotics-mobile.md',
-    'gpu-rendering':       'wiki/gpu-rendering.md',
+    'gpu-rendering':        'wiki/gpu-rendering.md',
     'battery-power':        'wiki/battery-power.md',
     'memory-management':    'wiki/memory-management.md',
     'display-screen':       'wiki/display-screen.md',
@@ -68,81 +68,84 @@ const ARTICLES = {
     'computer-vision-mobile':'wiki/computer-vision-mobile.md',
 };
 
+// NAPRAWKA: ikony używają pełnej klasy FA (np. "fa-brands fa-android")
+// zamiast samej nazwy ikony — buildSidebar() nie dokłada już hardkodowanego "fa-solid"
 const METADATA = {
-    'mobile-os':            { category: 'Projektowanie i OS', title: 'Systemy Operacyjne Urządzeń Mobilnych', icon: 'fa-mobile-screen-button' },
-    'mobile-design':        { category: 'Projektowanie i OS', title: 'Projektowanie Aplikacji Mobilnych', icon: 'fa-pen-ruler' },
-    'android-ecosystem':    { category: 'Projektowanie i OS', title: 'Ekosystem Android i Google Play', icon: 'fa-android' },
-    'ios-ecosystem':        { category: 'Projektowanie i OS', title: 'Ekosystem iOS i App Store', icon: 'fa-apple' },
-    'mobile-security':      { category: 'Projektowanie i OS', title: 'Bezpieczeństwo Aplikacji Mobilnych', icon: 'fa-shield-halved' },
-    'mobile-performance':   { category: 'Projektowanie i OS', title: 'Wydajność Aplikacji Mobilnych', icon: 'fa-gauge-high' },
-    'mobile-hardware':      { category: 'Architektura Sprzętu', title: 'Architektura i Budowa Urządzeń Mobilnych', icon: 'fa-microchip' },
-    'ui-ux':                { category: 'Metody Interakcji UI/UX', title: 'Metody Interakcji i Projektowanie UI/UX', icon: 'fa-hand-pointer' },
-    'material-design':      { category: 'Metody Interakcji UI/UX', title: 'Material Design 3', icon: 'fa-palette' },
-    'accessibility':        { category: 'Metody Interakcji UI/UX', title: 'Dostępność Aplikacji Mobilnych', icon: 'fa-universal-access' },
-    'android-studio':       { category: 'Programowanie Natywne Android', title: 'Android Studio — Kotlin & Compose', icon: 'fa-android' },
-    'kotlin-basics':        { category: 'Programowanie Natywne Android', title: 'Kotlin — Podstawy Języka', icon: 'fa-k' },
-    'jetpack-compose':      { category: 'Programowanie Natywne Android', title: 'Jetpack Compose — Deklaratywny UI', icon: 'fa-layer-group' },
-    'android-architecture': { category: 'Programowanie Natywne Android', title: 'Architektura Aplikacji — MVVM', icon: 'fa-sitemap' },
-    'android-data':         { category: 'Programowanie Natywne Android', title: 'Przechowywanie Danych — Room', icon: 'fa-database' },
-    'android-network':      { category: 'Programowanie Natywne Android', title: 'Sieć i REST API — Retrofit', icon: 'fa-network-wired' },
-    'android-testing':      { category: 'Programowanie Natywne Android', title: 'Testowanie Aplikacji Android', icon: 'fa-flask' },
-    'xcode-ios':            { category: 'Programowanie Natywne iOS', title: 'Xcode — Swift & SwiftUI', icon: 'fa-apple' },
-    'swift-basics':         { category: 'Programowanie Natywne iOS', title: 'Swift — Podstawy Języka', icon: 'fa-s' },
-    'swiftui-advanced':     { category: 'Programowanie Natywne iOS', title: 'SwiftUI — Zaawansowane Techniki', icon: 'fa-wand-magic-sparkles' },
-    'ios-networking':       { category: 'Programowanie Natywne iOS', title: 'Sieć i API w iOS', icon: 'fa-network-wired' },
-    'ios-data':             { category: 'Programowanie Natywne iOS', title: 'Przechowywanie Danych w iOS', icon: 'fa-database' },
-    'ios-notifications':    { category: 'Programowanie Natywne iOS', title: 'Powiadomienia Push w iOS', icon: 'fa-bell' },
-    'cross-platform':       { category: 'Cross-Platform i PWA', title: 'Programowanie Cross-Platformowe', icon: 'fa-layer-group' },
-    'flutter-advanced':     { category: 'Cross-Platform i PWA', title: 'Flutter — Zaawansowane Techniki', icon: 'fa-wind' },
-    'react-native':         { category: 'Cross-Platform i PWA', title: 'React Native', icon: 'fa-react' },
-    'pwa-advanced':         { category: 'Cross-Platform i PWA', title: 'Progressive Web Apps', icon: 'fa-globe' },
-    'kmp-multiplatform':    { category: 'Cross-Platform i PWA', title: 'Kotlin Multiplatform', icon: 'fa-k' },
-    'sensors':              { category: 'Obsługa Sensorów', title: 'Sensory Ruchu i Środowiskowe', icon: 'fa-compass' },
-    'camera-api':           { category: 'Obsługa Sensorów', title: 'Camera API i Przetwarzanie Obrazu', icon: 'fa-camera' },
-    'location-maps':        { category: 'Obsługa Sensorów', title: 'Lokalizacja i Mapy', icon: 'fa-location-dot' },
-    'audio-microphone':     { category: 'Obsługa Sensorów', title: 'Audio i Mikrofon', icon: 'fa-microphone' },
-    'biometrics':           { category: 'Obsługa Sensorów', title: 'Biometria i Uwierzytelnianie', icon: 'fa-fingerprint' },
-    'iot-mobile':           { category: 'IoT Mobile', title: 'Aplikacje Mobilne IoT', icon: 'fa-wifi' },
-    'wifi-networking':      { category: 'IoT Mobile', title: 'Wi-Fi i Sieć Lokalna', icon: 'fa-house-signal' },
-    'smart-home':           { category: 'IoT Mobile', title: 'Smart Home i Protokoły Automatyki', icon: 'fa-house' },
-    'affective-computing':  { category: 'Informatyka Afektywna', title: 'Informatyka Afektywna w Mobile', icon: 'fa-face-smile' },
-    'emotion-recognition':  { category: 'Informatyka Afektywna', title: 'Rozpoznawanie Emocji z Kamery', icon: 'fa-eye' },
-    'voice-analysis':       { category: 'Informatyka Afektywna', title: 'Analiza Głosu i Mowy', icon: 'fa-waveform-lines' },
-    'mental-health-apps':   { category: 'Informatyka Afektywna', title: 'Aplikacje Zdrowia Psychicznego', icon: 'fa-heart-pulse' },
-    'xr-mobile':            { category: 'XR i Rozszerzona Rzeczywistość', title: 'Wprowadzenie do XR Mobile', icon: 'fa-vr-cardboard' },
-    'arcore-advanced':      { category: 'XR i Rozszerzona Rzeczywistość', title: 'ARCore — Zaawansowane Techniki', icon: 'fa-cube' },
-    'vr-mobile':            { category: 'XR i Rozszerzona Rzeczywistość', title: 'VR Mobilne i Google Cardboard', icon: 'fa-glasses' },
-    'mobile-games':         { category: 'Gry Mobilne', title: 'Podstawy Programowania Gier Mobilnych', icon: 'fa-gamepad' },
-    'unity-advanced':       { category: 'Gry Mobilne', title: 'Unity — Zaawansowane Techniki', icon: 'fa-cube' },
-    'game-physics':         { category: 'Gry Mobilne', title: 'Fizyka i Kolizje w Grach Mobilnych', icon: 'fa-atom' },
-    'gpu-rendering':        { category: 'Architektura Sprzętu', title: 'GPU i Renderowanie Grafiki', icon: 'fa-display' },
-    'battery-power':        { category: 'Architektura Sprzętu', title: 'Bateria i Zarządzanie Energią', icon: 'fa-battery-half' },
-    'memory-management':    { category: 'Architektura Sprzętu', title: 'Pamięć RAM i Zarządzanie Zasobami', icon: 'fa-memory' },
-    'display-screen':       { category: 'Architektura Sprzętu', title: 'Wyświetlacze i Technologie Ekranów', icon: 'fa-display' },
-    'connectivity':         { category: 'Architektura Sprzętu', title: 'Łączność Bezprzewodowa — LTE, 5G, Wi-Fi 6', icon: 'fa-signal' },
-    'navigation-patterns':  { category: 'Metody Interakcji UI/UX', title: 'Wzorce Nawigacji', icon: 'fa-route' },
-    'gestures-interactions':{ category: 'Metody Interakcji UI/UX', title: 'Gesty i Interakcje Dotykowe', icon: 'fa-hand-pointer' },
-    'mqtt-protocol':        { category: 'IoT Mobile', title: 'MQTT — Protokół dla IoT', icon: 'fa-tower-broadcast' },
-    'game-monetization':    { category: 'Gry Mobilne', title: 'Monetyzacja Gier Mobilnych', icon: 'fa-coins' },
-    'robot-control-ui':     { category: 'Robotyka Autonomiczna', title: 'UI Sterowania Robotem', icon: 'fa-gamepad' },
-    'robotics-mobile':      { category: 'Robotyka Autonomiczna', title: 'Aplikacja jako Kontroler Robota', icon: 'fa-robot' },
-    'ros2-mobile':          { category: 'Robotyka Autonomiczna', title: 'ROS2 i Sterowanie Robotem', icon: 'fa-diagram-project' },
-    'computer-vision-mobile':{ category: 'Robotyka Autonomiczna', title: 'Computer Vision w Robotyce Mobilnej', icon: 'fa-eye' },
+    'mobile-os':            { category: 'Projektowanie i OS',             title: 'Systemy Operacyjne Urządzeń Mobilnych',    icon: 'fa-solid fa-mobile-screen-button' },
+    'mobile-design':        { category: 'Projektowanie i OS',             title: 'Projektowanie Aplikacji Mobilnych',        icon: 'fa-solid fa-pen-ruler' },
+    'android-ecosystem':    { category: 'Projektowanie i OS',             title: 'Ekosystem Android i Google Play',          icon: 'fa-brands fa-android' },
+    'ios-ecosystem':        { category: 'Projektowanie i OS',             title: 'Ekosystem iOS i App Store',                icon: 'fa-brands fa-apple' },
+    'mobile-security':      { category: 'Projektowanie i OS',             title: 'Bezpieczeństwo Aplikacji Mobilnych',       icon: 'fa-solid fa-shield-halved' },
+    'mobile-performance':   { category: 'Projektowanie i OS',             title: 'Wydajność Aplikacji Mobilnych',            icon: 'fa-solid fa-gauge-high' },
+    'mobile-hardware':      { category: 'Architektura Sprzętu',           title: 'Architektura i Budowa Urządzeń Mobilnych', icon: 'fa-solid fa-microchip' },
+    'ui-ux':                { category: 'Metody Interakcji UI/UX',        title: 'Metody Interakcji i Projektowanie UI/UX',  icon: 'fa-solid fa-hand-pointer' },
+    'material-design':      { category: 'Metody Interakcji UI/UX',        title: 'Material Design 3',                        icon: 'fa-solid fa-palette' },
+    'accessibility':        { category: 'Metody Interakcji UI/UX',        title: 'Dostępność Aplikacji Mobilnych',           icon: 'fa-solid fa-universal-access' },
+    'android-studio':       { category: 'Programowanie Natywne Android',  title: 'Android Studio — Kotlin & Compose',        icon: 'fa-brands fa-android' },
+    'kotlin-basics':        { category: 'Programowanie Natywne Android',  title: 'Kotlin — Podstawy Języka',                 icon: 'fa-solid fa-code' },
+    'jetpack-compose':      { category: 'Programowanie Natywne Android',  title: 'Jetpack Compose — Deklaratywny UI',        icon: 'fa-solid fa-layer-group' },
+    'android-architecture': { category: 'Programowanie Natywne Android',  title: 'Architektura Aplikacji — MVVM',            icon: 'fa-solid fa-sitemap' },
+    'android-data':         { category: 'Programowanie Natywne Android',  title: 'Przechowywanie Danych — Room',             icon: 'fa-solid fa-database' },
+    'android-network':      { category: 'Programowanie Natywne Android',  title: 'Sieć i REST API — Retrofit',               icon: 'fa-solid fa-network-wired' },
+    'android-testing':      { category: 'Programowanie Natywne Android',  title: 'Testowanie Aplikacji Android',             icon: 'fa-solid fa-flask' },
+    'xcode-ios':            { category: 'Programowanie Natywne iOS',      title: 'Xcode — Swift & SwiftUI',                  icon: 'fa-brands fa-apple' },
+    'swift-basics':         { category: 'Programowanie Natywne iOS',      title: 'Swift — Podstawy Języka',                  icon: 'fa-solid fa-swift' },
+    'swiftui-advanced':     { category: 'Programowanie Natywne iOS',      title: 'SwiftUI — Zaawansowane Techniki',          icon: 'fa-solid fa-wand-magic-sparkles' },
+    'ios-networking':       { category: 'Programowanie Natywne iOS',      title: 'Sieć i API w iOS',                         icon: 'fa-solid fa-network-wired' },
+    'ios-data':             { category: 'Programowanie Natywne iOS',      title: 'Przechowywanie Danych w iOS',              icon: 'fa-solid fa-database' },
+    'ios-notifications':    { category: 'Programowanie Natywne iOS',      title: 'Powiadomienia Push w iOS',                 icon: 'fa-solid fa-bell' },
+    'cross-platform':       { category: 'Cross-Platform i PWA',           title: 'Programowanie Cross-Platformowe',          icon: 'fa-solid fa-layer-group' },
+    'flutter-advanced':     { category: 'Cross-Platform i PWA',           title: 'Flutter — Zaawansowane Techniki',          icon: 'fa-solid fa-wind' },
+    'react-native':         { category: 'Cross-Platform i PWA',           title: 'React Native',                             icon: 'fa-brands fa-react' },
+    'pwa-advanced':         { category: 'Cross-Platform i PWA',           title: 'Progressive Web Apps',                     icon: 'fa-solid fa-globe' },
+    'kmp-multiplatform':    { category: 'Cross-Platform i PWA',           title: 'Kotlin Multiplatform',                     icon: 'fa-solid fa-code-branch' },
+    'sensors':              { category: 'Obsługa Sensorów',               title: 'Sensory Ruchu i Środowiskowe',             icon: 'fa-solid fa-compass' },
+    'camera-api':           { category: 'Obsługa Sensorów',               title: 'Camera API i Przetwarzanie Obrazu',        icon: 'fa-solid fa-camera' },
+    'location-maps':        { category: 'Obsługa Sensorów',               title: 'Lokalizacja i Mapy',                       icon: 'fa-solid fa-location-dot' },
+    'audio-microphone':     { category: 'Obsługa Sensorów',               title: 'Audio i Mikrofon',                         icon: 'fa-solid fa-microphone' },
+    'biometrics':           { category: 'Obsługa Sensorów',               title: 'Biometria i Uwierzytelnianie',             icon: 'fa-solid fa-fingerprint' },
+    'iot-mobile':           { category: 'IoT Mobile',                     title: 'Aplikacje Mobilne IoT',                    icon: 'fa-solid fa-wifi' },
+    'wifi-networking':      { category: 'IoT Mobile',                     title: 'Wi-Fi i Sieć Lokalna',                     icon: 'fa-solid fa-house-signal' },
+    'smart-home':           { category: 'IoT Mobile',                     title: 'Smart Home i Protokoły Automatyki',        icon: 'fa-solid fa-house' },
+    'mqtt-protocol':        { category: 'IoT Mobile',                     title: 'MQTT — Protokół dla IoT',                  icon: 'fa-solid fa-tower-broadcast' },
+    'affective-computing':  { category: 'Informatyka Afektywna',          title: 'Informatyka Afektywna w Mobile',           icon: 'fa-solid fa-face-smile' },
+    'emotion-recognition':  { category: 'Informatyka Afektywna',          title: 'Rozpoznawanie Emocji z Kamery',            icon: 'fa-solid fa-eye' },
+    'voice-analysis':       { category: 'Informatyka Afektywna',          title: 'Analiza Głosu i Mowy',                     icon: 'fa-solid fa-waveform-lines' },
+    'mental-health-apps':   { category: 'Informatyka Afektywna',          title: 'Aplikacje Zdrowia Psychicznego',           icon: 'fa-solid fa-heart-pulse' },
+    'xr-mobile':            { category: 'XR i Rozszerzona Rzeczywistość', title: 'Wprowadzenie do XR Mobile',                icon: 'fa-solid fa-vr-cardboard' },
+    'arcore-advanced':      { category: 'XR i Rozszerzona Rzeczywistość', title: 'ARCore — Zaawansowane Techniki',           icon: 'fa-solid fa-cube' },
+    'vr-mobile':            { category: 'XR i Rozszerzona Rzeczywistość', title: 'VR Mobilne i Google Cardboard',            icon: 'fa-solid fa-glasses' },
+    'mobile-games':         { category: 'Gry Mobilne',                    title: 'Podstawy Programowania Gier Mobilnych',    icon: 'fa-solid fa-gamepad' },
+    'unity-advanced':       { category: 'Gry Mobilne',                    title: 'Unity — Zaawansowane Techniki',            icon: 'fa-solid fa-cube' },
+    'game-physics':         { category: 'Gry Mobilne',                    title: 'Fizyka i Kolizje w Grach Mobilnych',       icon: 'fa-solid fa-atom' },
+    'game-monetization':    { category: 'Gry Mobilne',                    title: 'Monetyzacja Gier Mobilnych',               icon: 'fa-solid fa-coins' },
+    'gpu-rendering':        { category: 'Architektura Sprzętu',           title: 'GPU i Renderowanie Grafiki',               icon: 'fa-solid fa-display' },
+    'battery-power':        { category: 'Architektura Sprzętu',           title: 'Bateria i Zarządzanie Energią',            icon: 'fa-solid fa-battery-half' },
+    'memory-management':    { category: 'Architektura Sprzętu',           title: 'Pamięć RAM i Zarządzanie Zasobami',        icon: 'fa-solid fa-memory' },
+    'display-screen':       { category: 'Architektura Sprzętu',           title: 'Wyświetlacze i Technologie Ekranów',       icon: 'fa-solid fa-display' },
+    'connectivity':         { category: 'Architektura Sprzętu',           title: 'Łączność Bezprzewodowa — LTE, 5G, Wi-Fi 6',icon: 'fa-solid fa-signal' },
+    'navigation-patterns':  { category: 'Metody Interakcji UI/UX',        title: 'Wzorce Nawigacji',                         icon: 'fa-solid fa-route' },
+    'gestures-interactions':{ category: 'Metody Interakcji UI/UX',        title: 'Gesty i Interakcje Dotykowe',              icon: 'fa-solid fa-hand-pointer' },
+    'robot-control-ui':     { category: 'Robotyka Autonomiczna',          title: 'UI Sterowania Robotem',                    icon: 'fa-solid fa-gamepad' },
+    'robotics-mobile':      { category: 'Robotyka Autonomiczna',          title: 'Aplikacja jako Kontroler Robota',          icon: 'fa-solid fa-robot' },
+    'ros2-mobile':          { category: 'Robotyka Autonomiczna',          title: 'ROS2 i Sterowanie Robotem',                icon: 'fa-solid fa-diagram-project' },
+    'computer-vision-mobile':{ category: 'Robotyka Autonomiczna',         title: 'Computer Vision w Robotyce Mobilnej',      icon: 'fa-solid fa-eye' },
 };
 
+// NAPRAWKA: ikony kategorii używają pełnej klasy FA
 const CATEGORIES = [
-    { id: 'cat-os',       name: 'Projektowanie i OS',             icon: 'fa-mobile-screen-button', articles: ['mobile-os','mobile-design','android-ecosystem','ios-ecosystem','mobile-security','mobile-performance'] },
-    { id: 'cat-hw',       name: 'Architektura Sprzętu',           icon: 'fa-microchip',            articles: ['mobile-hardware','gpu-rendering','battery-power','memory-management','display-screen','connectivity'] },
-    { id: 'cat-ux',       name: 'Metody Interakcji UI/UX',        icon: 'fa-hand-pointer',         articles: ['ui-ux','material-design','accessibility','navigation-patterns','gestures-interactions'] },
-    { id: 'cat-android',  name: 'Programowanie Natywne Android',  icon: 'fa-android',              articles: ['android-studio','kotlin-basics','jetpack-compose','android-architecture','android-data','android-network','android-testing'] },
-    { id: 'cat-ios',      name: 'Programowanie Natywne iOS',      icon: 'fa-apple',                articles: ['xcode-ios','swift-basics','swiftui-advanced','ios-networking','ios-data','ios-notifications'] },
-    { id: 'cat-cross',    name: 'Cross-Platform i PWA',           icon: 'fa-layer-group',          articles: ['cross-platform','flutter-advanced','react-native','pwa-advanced','kmp-multiplatform'] },
-    { id: 'cat-sensors',  name: 'Obsługa Sensorów',               icon: 'fa-compass',              articles: ['sensors','camera-api','location-maps','audio-microphone','biometrics'] },
-    { id: 'cat-iot',      name: 'IoT Mobile',                     icon: 'fa-wifi',                 articles: ['iot-mobile','wifi-networking','smart-home','mqtt-protocol'] },
-    { id: 'cat-affective',name: 'Informatyka Afektywna',          icon: 'fa-face-smile',           articles: ['affective-computing','emotion-recognition','voice-analysis','mental-health-apps'] },
-    { id: 'cat-xr',       name: 'XR i Rozszerzona Rzeczywistość', icon: 'fa-vr-cardboard',         articles: ['xr-mobile','arcore-advanced','vr-mobile'] },
-    { id: 'cat-games',    name: 'Gry Mobilne',                    icon: 'fa-gamepad',              articles: ['mobile-games','unity-advanced','game-physics','game-monetization'] },
-    { id: 'cat-robots',   name: 'Robotyka Autonomiczna',          icon: 'fa-robot',                articles: ['robotics-mobile','ros2-mobile','computer-vision-mobile','robot-control-ui'] },
+    { id: 'cat-os',       name: 'Projektowanie i OS',             icon: 'fa-solid fa-mobile-screen-button', articles: ['mobile-os','mobile-design','android-ecosystem','ios-ecosystem','mobile-security','mobile-performance'] },
+    { id: 'cat-hw',       name: 'Architektura Sprzętu',           icon: 'fa-solid fa-microchip',            articles: ['mobile-hardware','gpu-rendering','battery-power','memory-management','display-screen','connectivity'] },
+    { id: 'cat-ux',       name: 'Metody Interakcji UI/UX',        icon: 'fa-solid fa-hand-pointer',         articles: ['ui-ux','material-design','accessibility','navigation-patterns','gestures-interactions'] },
+    { id: 'cat-android',  name: 'Programowanie Natywne Android',  icon: 'fa-brands fa-android',             articles: ['android-studio','kotlin-basics','jetpack-compose','android-architecture','android-data','android-network','android-testing'] },
+    { id: 'cat-ios',      name: 'Programowanie Natywne iOS',      icon: 'fa-brands fa-apple',               articles: ['xcode-ios','swift-basics','swiftui-advanced','ios-networking','ios-data','ios-notifications'] },
+    { id: 'cat-cross',    name: 'Cross-Platform i PWA',           icon: 'fa-solid fa-layer-group',          articles: ['cross-platform','flutter-advanced','react-native','pwa-advanced','kmp-multiplatform'] },
+    { id: 'cat-sensors',  name: 'Obsługa Sensorów',               icon: 'fa-solid fa-compass',              articles: ['sensors','camera-api','location-maps','audio-microphone','biometrics'] },
+    { id: 'cat-iot',      name: 'IoT Mobile',                     icon: 'fa-solid fa-wifi',                 articles: ['iot-mobile','wifi-networking','smart-home','mqtt-protocol'] },
+    { id: 'cat-affective',name: 'Informatyka Afektywna',          icon: 'fa-solid fa-face-smile',           articles: ['affective-computing','emotion-recognition','voice-analysis','mental-health-apps'] },
+    { id: 'cat-xr',       name: 'XR i Rozszerzona Rzeczywistość', icon: 'fa-solid fa-vr-cardboard',         articles: ['xr-mobile','arcore-advanced','vr-mobile'] },
+    { id: 'cat-games',    name: 'Gry Mobilne',                    icon: 'fa-solid fa-gamepad',              articles: ['mobile-games','unity-advanced','game-physics','game-monetization'] },
+    { id: 'cat-robots',   name: 'Robotyka Autonomiczna',          icon: 'fa-solid fa-robot',                articles: ['robotics-mobile','ros2-mobile','computer-vision-mobile','robot-control-ui'] },
 ];
 
 // ---- INIT ----
@@ -198,16 +201,18 @@ function buildSidebar() {
     CATEGORIES.forEach(cat => {
         const sec = document.createElement('div');
         sec.className = 'wiki-category';
+        // NAPRAWKA: ikony kategorii i artykułów mają już pełną klasę FA w danych —
+        // nie doklejamy hardkodowanego "fa-solid", tylko używamy icon bezpośrednio
         sec.innerHTML = `
             <h4 class="cat-header" data-cat="${cat.id}">
-                <i class="fa-solid ${cat.icon}"></i>
+                <i class="${cat.icon}"></i>
                 <span>${cat.name}</span>
                 <i class="fa-solid fa-chevron-down toggle-icon"></i>
             </h4>
             <ul class="cat-list" id="${cat.id}">
                 ${cat.articles.map(id => {
                     const m = METADATA[id] || {};
-                    return `<li><a href="#${id}" data-article="${id}"><i class="fa-solid ${m.icon||'fa-file'} article-icon"></i>${m.title||id}</a></li>`;
+                    return `<li><a href="#${id}" data-article="${id}"><i class="${m.icon || 'fa-solid fa-file'} article-icon"></i>${m.title || id}</a></li>`;
                 }).join('')}
             </ul>`;
         nav.appendChild(sec);
@@ -288,6 +293,11 @@ async function loadArticle(articleId) {
     }
 }
 
+function showError(msg) {
+    const container = document.getElementById('wikiArticle');
+    if (container) container.innerHTML = `<div class="wiki-error"><i class="fa-solid fa-triangle-exclamation"></i><p>${msg}</p></div>`;
+}
+
 function updateBreadcrumbs(id) {
     const crumbs = document.getElementById('breadcrumbs');
     const meta = METADATA[id];
@@ -351,16 +361,25 @@ function generateTableOfContents(container) {
         const li = document.createElement('li');
         li.style.paddingLeft = h.tagName === 'H3' ? '16px' : '0';
         li.innerHTML = `<a href="#${id}">${h.textContent}</a>`;
-        li.querySelector('a').addEventListener('click', e => { e.preventDefault(); h.scrollIntoView({ behavior: 'smooth' }); });
         ul.appendChild(li);
+        li.querySelector('a').addEventListener('click', e => {
+            e.preventDefault();
+            h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     });
-    (container.querySelector('.reading-time') || container.querySelector('h1'))?.insertAdjacentElement('afterend', toc);
+    container.querySelector('h1')?.insertAdjacentElement('afterend', toc);
 }
 
-function showError(msg) {
-    const c = document.getElementById('wikiArticle');
-    if (!c) return;
-    c.innerHTML = `<div class="wiki-error"><i class="fa-solid fa-triangle-exclamation"></i><h3>${msg}</h3></div>`;
-    const cr = document.getElementById('breadcrumbs');
-    if (cr) cr.style.display = 'none';
-}
+// Mobile sidebar toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('wikiSidebar');
+    toggle?.addEventListener('click', () => sidebar?.classList.toggle('open'));
+    document.addEventListener('click', e => {
+        if (sidebar?.classList.contains('open') &&
+            !sidebar.contains(e.target) &&
+            !toggle?.contains(e.target)) {
+            sidebar.classList.remove('open');
+        }
+    });
+});
