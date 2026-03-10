@@ -1,4 +1,4 @@
-# Bateria i Zarządzanie Energią
+# Bateria i zarządzanie energią
 
 Czas pracy na baterii to jeden z kluczowych czynników wpływających na oceny aplikacji. Użytkownicy szybko odinstalują aplikację, która rozładowuje telefon. Android i iOS mają rozbudowane mechanizmy ograniczania zużycia energii.
 

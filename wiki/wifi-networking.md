@@ -1,4 +1,4 @@
-# Wi-Fi i Sieć Lokalna
+# Wi-Fi i sieć lokalna
 
 Aplikacje IoT często komunikują się z urządzeniami w tej samej sieci lokalnej Wi-Fi, bez pośrednictwa chmury. Android i iOS udostępniają API do odkrywania urządzeń (mDNS/Bonjour), komunikacji TCP/UDP i tworzenia hotspotów.
 

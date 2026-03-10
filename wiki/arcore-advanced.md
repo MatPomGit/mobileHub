@@ -1,4 +1,4 @@
-# ARCore — Zaawansowane Techniki
+# ARCore — Zaawansowane techniki
 
 ARCore (Android) umożliwia tworzenie rozbudowanych aplikacji AR: rozpoznawanie płaszczyzn, śledzenie obiektów 3D, efekty oświetlenia i interaktywne nakładki. Biblioteka Sceneform i nowszy SceneView upraszczają renderowanie 3D w Compose.
 

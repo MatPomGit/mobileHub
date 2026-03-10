@@ -1,4 +1,4 @@
-# Material Design 3 — System Projektowania Google
+# Material Design 3 — system projektowania google
 
 Material Design 3 (Material You) to trzecia generacja systemu projektowania Google, wprowadzona wraz z Androidem 12. Definiuje dynamiczne kolory dopasowujące się do tapety, nowy system typografii i zaktualizowane komponenty.
 

@@ -1,4 +1,4 @@
-# Programowanie Aplikacji Mobilnych XR
+# Programowanie aplikacji mobilnych XR
 
 XR (Extended Reality) to termin zbiorczy dla trzech typów rozszerzonej rzeczywistości: **AR** (Augmented Reality), **VR** (Virtual Reality) i **MR** (Mixed Reality). Smartfony są najpowszechniejszą platformą AR — każdy nowoczesny telefon ma kamerę i wystarczającą moc obliczeniową.
 

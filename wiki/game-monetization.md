@@ -1,4 +1,4 @@
-# Monetyzacja Gier Mobilnych
+# Monetyzacja gier mobilnych
 
 Gry mobilne generują większość przychodów z App Store i Google Play. Wybór modelu monetyzacji wpływa na projektowanie mechaniki gry, retencję graczy i długoterminowe przychody.
 

@@ -1,4 +1,4 @@
-# Lokalizacja i Mapy
+# Lokalizacja i mapy
 
 GPS i mapy to jedne z najczęściej używanych funkcji aplikacji mobilnych — od nawigacji po geofencing i śledzenie aktywności fizycznej. Android dostarcza Fused Location Provider, a Google Maps SDK i Mapbox umożliwiają bogatą wizualizację.
 

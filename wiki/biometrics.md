@@ -1,4 +1,4 @@
-# Biometria i Uwierzytelnianie
+# Biometria i uwierzytelnianie
 
 Biometria mobilna (odcisk palca, rozpoznawanie twarzy) zastępuje tradycyjne hasła wygodniejszym i bezpieczniejszym uwierzytelnianiem. Android udostępnia BiometricPrompt API, iOS — LocalAuthentication z Face ID i Touch ID.
 

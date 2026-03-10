@@ -1,4 +1,4 @@
-# Swift — Podstawy Języka
+# Swift — podstawy języka
 
 Swift to szybki, bezpieczny i wyrazisty język programowania stworzony przez Apple w 2014 roku. Od Swift 5.5 wprowadzono async/await, a od Swift 5.9 makra, które rewolucjonizują sposób pisania kodu iOS.
 

@@ -1,4 +1,4 @@
-# Rozpoznawanie Emocji z Kamery
+# Rozpoznawanie emocji z kamery
 
 Rozpoznawanie emocji twarzy to zastosowanie computer vision i deep learning do automatycznego klasyfikowania stanów emocjonalnych człowieka na podstawie wyrazu twarzy.
 

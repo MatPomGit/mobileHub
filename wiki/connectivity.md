@@ -1,4 +1,4 @@
-# Łączność Bezprzewodowa — LTE, 5G, Wi-Fi 6
+# Łączność bezprzewodowa — LTE, 5G, Wi-Fi 6
 
 Łączność bezprzewodowa to jeden z największych konsumentów energii w urządzeniu mobilnym, a jednocześnie kluczowy czynnik wpływający na wydajność aplikacji sieciowych.
 

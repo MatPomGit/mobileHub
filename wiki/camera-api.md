@@ -1,4 +1,4 @@
-# Camera API i Przetwarzanie Obrazu
+# Camera API i przetwarzanie obrazu
 
 Kamera to jeden z najważniejszych sensorów urządzenia mobilnego. CameraX (Android) i AVFoundation (iOS) udostępniają nowoczesne API do podglądu, fotografowania, nagrywania wideo i analizy klatek w czasie rzeczywistym.
 

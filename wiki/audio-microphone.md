@@ -1,4 +1,4 @@
-# Audio i Mikrofon
+# Audio i mikrofon
 
 Aplikacje mobilne coraz częściej korzystają z mikrofonu — do rozpoznawania mowy, analizy dźwięku, nagrywania i komunikacji głosowej. Android i iOS udostępniają niskopoziomowe API do nagrywania PCM oraz wysokopoziomowe narzędzia Speech Recognition.
 

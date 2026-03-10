@@ -1,4 +1,4 @@
-# Kotlin Multiplatform — Współdzielony Kod
+# Kotlin Multiplatform — współdzielony kod
 
 Kotlin Multiplatform (KMP) to technologia JetBrains pozwalająca współdzielić logikę biznesową między Androidem, iOS, webem i desktopem, zachowując **natywny UI** na każdej platformie. W odróżnieniu od Flutter/React Native, KMP nie narzuca własnego silnika renderowania.
 

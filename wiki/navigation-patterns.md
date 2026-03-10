@@ -1,4 +1,4 @@
-# Wzorce Nawigacji w Aplikacjach Mobilnych
+# Wzorce nawigacji w aplikacjach mobilnych
 
 Nawigacja definiuje jak użytkownicy przemieszczają się między ekranami. Zły wybór wzorca może sprawić, że intuicyjna aplikacja stanie się frustrująca.
 

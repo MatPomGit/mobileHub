@@ -1,4 +1,4 @@
-# MQTT — Protokół dla IoT
+# MQTT — protokół dla IoT
 
 MQTT (Message Queuing Telemetry Transport) to lekki protokół publish-subscribe zaprojektowany dla urządzeń IoT o ograniczonej przepustowości i mocy. Działa ponad TCP/IP i jest idealny dla czujników, smart home i telemetrii.
 

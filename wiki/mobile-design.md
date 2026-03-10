@@ -1,4 +1,4 @@
-# Projektowanie Aplikacji Mobilnych
+# Projektowanie aplikacji mobilnych
 
 Projektowanie aplikacji mobilnej to iteracyjny proces, który zaczyna się od zrozumienia użytkownika, jego potrzeb i kontekstu użycia — i dopiero potem przechodzi do warstwy wizualnej.
 

@@ -1,4 +1,4 @@
-# Flutter — Zaawansowane Techniki
+# Flutter — zaawansowane techniki
 
 Flutter umożliwia tworzenie aplikacji dla Android, iOS, Web i Desktop z jednej bazy kodu. Silnik Impeller (od Flutter 3.10) renderuje UI niezależnie od platformy z wysoką wydajnością — bez natywnych widżetów, ale z dokładnym odwzorowaniem Material i Cupertino.
 

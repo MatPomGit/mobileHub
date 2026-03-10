@@ -1,4 +1,4 @@
-# UI Sterowania Robotem
+# UI sterowania robotem
 
 Aplikacja mobilna jako kontroler robota wymaga specyficznego podejścia do projektowania interfejsu — niskie opóźnienia, czytelność w ruchu, jednoznaczna informacja zwrotna i mechanizmy bezpieczeństwa.
 

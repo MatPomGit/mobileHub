@@ -1,4 +1,4 @@
-# Metody Interakcji i Projektowanie UI/UX
+# Metody interakcji i projektowanie UI/UX
 
 Interfejs mobilny różni się fundamentalnie od desktopowego. Brak myszy i klawiatury, ekran dotykowy, zmienny kontekst użycia (stanie w autobusie, słońce, jedna ręka) — to wszystko wymaga innego podejścia do projektowania interakcji.
 

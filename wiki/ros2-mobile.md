@@ -1,4 +1,4 @@
-# ROS2 i Sterowanie Robotem z Aplikacji Mobilnej
+# ROS2 i sterowanie robotem z aplikacji mobilnej
 
 ROS2 (Robot Operating System 2) to standard middleware w robotyce. Aplikacja mobilna może komunikować się z robotem przez rosbridge WebSocket lub natywne biblioteki ROS2.
 

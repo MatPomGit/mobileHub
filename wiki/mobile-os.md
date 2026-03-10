@@ -1,4 +1,4 @@
-# Systemy Operacyjne Urządzeń Mobilnych
+# Systemy operacyjne urządzeń mobilnych
 
 Aplikacja mobilna to oprogramowanie zaprojektowane specjalnie z myślą o urządzeniach przenośnych — smartfonach i tabletach. W odróżnieniu od aplikacji desktopowych musi ona uwzględniać ograniczenia sprzętowe (bateria, pamięć, procesor), nieciągłość połączeń sieciowych i specyficzne wzorce interakcji dotykowej.
 

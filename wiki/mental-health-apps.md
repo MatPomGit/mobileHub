@@ -1,4 +1,4 @@
-# Aplikacje Wsparcia Zdrowia Psychicznego
+# Aplikacje wsparcia zdrowia psychicznego
 
 Aplikacje mobilne mogą odgrywać istotną rolę w monitorowaniu i wspieraniu zdrowia psychicznego. Łączą biometryczne czujniki urządzenia z algorytmami AI do wykrywania zmian nastroju.
 

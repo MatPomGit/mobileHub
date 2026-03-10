@@ -1,4 +1,4 @@
-# Wyświetlacze i Technologie Ekranów
+# Wyświetlacze i technologie ekranów
 
 Ekran to interfejs między aplikacją a użytkownikiem. Zrozumienie technologii wyświetlaczy, gęstości pikseli i technologii odświeżania jest kluczowe dla tworzenia aplikacji wyglądających ostro na każdym urządzeniu.
 

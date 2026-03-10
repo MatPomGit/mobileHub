@@ -1,4 +1,4 @@
-# Smart Home i Protokoły Automatyki
+# Smart Home i protokoły automatyki
 
 Ekosystem Smart Home obejmuje dziesiątki protokołów i standardów. Aplikacja mobilna musi znać specyfikę każdego z nich, by integrować się z urządzeniami i udostępniać zunifikowany interfejs użytkownikowi.
 

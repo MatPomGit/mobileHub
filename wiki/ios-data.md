@@ -1,4 +1,4 @@
-# Przechowywanie Danych w iOS
+# Przechowywanie danych w iOS
 
 iOS oferuje kilka mechanizmów persystencji danych — od prostych kluczy-wartości po zaawansowane bazy danych relacyjne i synchronizację z chmurą przez CloudKit.
 

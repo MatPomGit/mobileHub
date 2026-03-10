@@ -1,4 +1,4 @@
-# Analiza Głosu i Mowy
+# Analiza głosu i mowy
 
 Głos człowieka niesie informacje na dwóch poziomach — **semantycznym** (co zostało powiedziane) i **paralinguistycznym** (jak zostało powiedziane: ton, tempo, energia). Ten drugi poziom odzwierciedla stan emocjonalny mówcy i stanowi podstawę dla systemów Speech Emotion Recognition (SER).
 

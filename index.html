@@ -64,7 +64,7 @@
             font-family: var(--font);
             background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.5;
             min-height: 100vh;
             transition: background var(--transition), color var(--transition);
         }
@@ -103,7 +103,7 @@
             background: linear-gradient(135deg, var(--accent), var(--accent2));
             border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 18px; color: #fff;
+            font-size: 16px; color: #fff;
             flex-shrink: 0;
         }
 
@@ -131,7 +131,7 @@
             color: rgba(255,255,255,0.8);
             cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            font-size: 15px;
+            font-size: 14px;
             transition: all var(--transition);
         }
         .btn-icon:hover {
@@ -237,7 +237,7 @@
 
         .sidebar-section-title {
             font-size: 10px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1.5px; color: var(--text-muted);
+            letter-spacing: 1.4px; color: var(--text-muted);
             padding: 0 6px; margin-bottom: 10px;
         }
 
@@ -247,14 +247,14 @@
             display: flex; align-items: center; gap: 8px;
             padding: 8px 10px; border-radius: 8px;
             cursor: pointer; user-select: none;
-            font-size: 12px; font-weight: 700;
+            font-size: 11px; font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase; letter-spacing: 0.5px;
             transition: all var(--transition);
         }
         .cat-header:hover { background: var(--surface2); color: var(--text); }
-        .cat-header i:first-child { color: var(--accent); font-size: 11px; }
-        .cat-header .toggle-icon { margin-left: auto; font-size: 10px; transition: transform 0.2s; }
+        .cat-header i:first-child { color: var(--accent); font-size: 10px; }
+        .cat-header .toggle-icon { margin-left: auto; font-size: 10px; transition: transform 0.4s; }
 
         .cat-list { list-style: none; padding: 0 0 4px 16px; }
         .cat-list.collapsed { display: none; }
@@ -273,7 +273,7 @@
             color: var(--accent);
             font-weight: 600;
         }
-        .article-icon { font-size: 11px; flex-shrink: 0; opacity: 0.7; }
+        .article-icon { font-size: 10px; flex-shrink: 0; opacity: 0.7; }
 
         /* ===== MAIN CONTENT ===== */
         .wiki-main {
@@ -284,7 +284,7 @@
         /* Breadcrumbs */
         #breadcrumbs {
             display: none; align-items: center; gap: 8px;
-            font-size: 12px; color: var(--text-muted);
+            font-size: 11px; color: var(--text-muted);
             margin-bottom: 24px;
             flex-wrap: wrap;
         }
@@ -295,13 +295,13 @@
         /* ===== ARTICLE STYLES ===== */
         #wikiArticle h1 {
             font-size: clamp(22px, 3.5vw, 34px);
-            font-weight: 800; line-height: 1.2;
+            font-weight: 800; line-height: 1.1;
             margin-bottom: 16px; color: var(--text);
             border-bottom: 2px solid var(--accent);
             padding-bottom: 16px;
         }
         #wikiArticle h2 {
-            font-size: 20px; font-weight: 700;
+            font-size: 18px; font-weight: 700;
             margin: 36px 0 14px;
             color: var(--text);
             display: flex; align-items: center; gap: 10px;
@@ -361,7 +361,7 @@
             background: var(--surface2);
             border: 1px solid var(--border);
             padding: 2px 6px; border-radius: 4px;
-            font-size: 13px; color: var(--accent2);
+            font-size: 12px; color: var(--accent2);
         }
 
         /* Code blocks */
@@ -397,7 +397,7 @@
             background: var(--surface2);
             border: 1px solid var(--border);
             padding: 6px 14px; border-radius: 20px;
-            font-size: 12px; color: var(--text-muted);
+            font-size: 11px; color: var(--text-muted);
             margin-bottom: 20px;
         }
         .reading-time i { color: var(--accent); }

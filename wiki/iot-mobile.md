@@ -1,4 +1,4 @@
-# Programowanie Aplikacji Mobilnych IoT
+# Programowanie aplikacji mobilnych IoT
 
 Internet of Things (IoT) to ekosystem fizycznych urządzeń wymieniających dane przez sieć. Smartfon jest idealnym centrum sterowania IoT — posiada Bluetooth, Wi-Fi, NFC, ekran i obliczeniową moc do koordynowania dziesiątek urządzeń.
 

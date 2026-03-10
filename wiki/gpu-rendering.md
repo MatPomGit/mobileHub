@@ -1,4 +1,4 @@
-# GPU i Renderowanie Grafiki
+# GPU i renderowanie grafiki
 
 GPU (Graphics Processing Unit) w urządzeniach mobilnych odpowiada nie tylko za gry — renderuje każdą klatkę interfejsu użytkownika. Zrozumienie potoku renderowania pozwala eliminować przyczyny „jank" (zacinania) w aplikacjach.
 

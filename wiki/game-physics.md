@@ -1,4 +1,4 @@
-# Fizyka i Kolizje w Grach Mobilnych
+# Fizyka i kolizje w grach mobilnych
 
 Silniki fizyczne w grach mobilnych muszą balansować realizm z wydajnością. Zarówno Unity (PhysX/Havok) jak i Godot (Jolt Physics) posiadają wbudowane silniki 3D i 2D. Dla prostych gier mobilnych fizyka 2D jest wystarczająca i znacznie lżejsza obliczeniowo.
 

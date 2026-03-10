@@ -1,4 +1,4 @@
-# Bezpieczeństwo Aplikacji Mobilnych
+# Bezpieczeństwo aplikacji mobilnych
 
 Bezpieczeństwo mobilne obejmuje ochronę danych użytkownika, bezpieczną komunikację sieciową, odporność na reverse engineering i zgodność z regulacjami (RODO/GDPR, HIPAA). Naruszenie bezpieczeństwa = utrata zaufania, ocen i potencjalne konsekwencje prawne.
 

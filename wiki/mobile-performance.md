@@ -1,4 +1,4 @@
-# Wydajność Aplikacji Mobilnych
+# Wydajność aplikacji mobilnych
 
 Wydajność aplikacji mobilnych to jeden z kluczowych czynników decydujących o sukcesie w sklepie. Google i Apple automatycznie mierzą wskaźniki jakości i mogą obniżyć widoczność lub usunąć aplikacje, które je przekraczają.
 

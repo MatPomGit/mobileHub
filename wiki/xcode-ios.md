@@ -1,4 +1,4 @@
-# Programowanie Natywne iOS — Xcode i Swift
+# Programowanie natywne iOS — Xcode i Swift
 
 Xcode to oficjalne IDE Apple dla systemów iOS, iPadOS, macOS, watchOS i tvOS. Wymaga komputera Mac. Językiem programowania jest **Swift** — bezpieczny, szybki i nowoczesny język stworzony przez Apple w 2014 roku.
 

@@ -1,4 +1,4 @@
-# SwiftUI — Zaawansowane Techniki
+# SwiftUI — zaawansowane techniki
 
 SwiftUI to deklaratywny framework UI Apple, dostępny od iOS 13. Wersja iOS 17+ przynosi Observable macro i znaczące uproszczenia state management.
 

@@ -1,4 +1,4 @@
-# Architektura i Budowa Urządzeń Mobilnych
+# Architektura i budowa urządzeń mobilnych
 
 Zrozumienie sprzętu urządzenia mobilnego pozwala pisać lepsze, wydajniejsze aplikacje — wiedzieć, dlaczego pewne operacje są kosztowne, jak efektywnie korzystać z baterii i jak interpretować ograniczenia platformy.
 

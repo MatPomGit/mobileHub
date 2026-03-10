@@ -1,4 +1,4 @@
-# Pamięć RAM i Zarządzanie Zasobami
+# Pamięć RAM i zarządzanie zasobami
 
 Urządzenia mobilne mają ograniczoną pamięć RAM (2–16 GB) współdzieloną przez system i wszystkie aplikacje. Nadmierne zużycie pamięci powoduje wyrzucenie aplikacji przez system (OOM kill) lub spowolnienie.
 

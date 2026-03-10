@@ -1,4 +1,4 @@
-# Programowanie Cross-Platformowe i PWA
+# Programowanie cross-platformowe i PWA
 
 Programowanie cross-platformowe pozwala stworzyć jedną aplikację działającą zarówno na Android, jak i iOS (a często też web i desktop). Zamiast utrzymywać dwa oddzielne kody źródłowe, piszesz jeden — i kompilujesz/uruchamiasz na wielu platformach.
 

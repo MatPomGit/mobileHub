@@ -1,4 +1,4 @@
-# Unity — Zaawansowane Techniki dla Mobile
+# Unity — zaawansowane techniki dla mobile
 
 Profesjonalne gry mobilne w Unity wymagają znajomości zaawansowanych technik optymalizacji, monetyzacji i systemu animacji.
 

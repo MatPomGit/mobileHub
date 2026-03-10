@@ -1,4 +1,4 @@
-# Programowanie Autonomicznych Robotów
+# Programowanie autonomicznych robotów
 
 Aplikacje mobilne pełnią kluczową rolę w ekosystemie robotyki: jako interfejsy sterowania, narzędzia do wizualizacji, portale do monitorowania floty robotów lub platformy do trenowania modeli AI on-device. Smartfon może też sam być "mózgiem" małego robota mobilnego.
 

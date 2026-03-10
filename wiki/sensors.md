@@ -1,4 +1,4 @@
-# Obsługa Sensorów Urządzenia Mobilnego
+# Obsługa sensorów urządzenia mobilnego
 
 Urządzenia mobilne są naszpikowane sensorami. Ich obsługa otwiera możliwości niedostępne w żadnej innej formie oprogramowania — od pomiaru kroku, przez nawigację AR, po wykrywanie upadków.
 

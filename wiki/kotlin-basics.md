@@ -1,4 +1,4 @@
-# Kotlin — Podstawy Języka
+# Kotlin — podstawy języka
 
 Kotlin to statycznie typowany, wieloparadygmatyczny język programowania tworzony przez JetBrains. Kompiluje się do JVM bytecode (Android), JavaScript i natywnego kodu maszynowego (KMP/iOS). Google ogłosił go oficjalnym językiem Android w 2017 roku.
 

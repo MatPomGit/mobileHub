@@ -1,4 +1,4 @@
-# Programowanie Gier Mobilnych
+# Programowanie gier mobilnych
 
 Gry mobilne to największy rynek w branży gier — generują ponad 50% globalnych przychodów z gier. Tworzenie gier mobilnych różni się od desktopowych: ograniczone sesje użytkownika, ekran dotykowy, premium vs free-to-play, specyficzne silniki.
 

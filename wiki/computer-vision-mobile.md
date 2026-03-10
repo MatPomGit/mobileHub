@@ -1,4 +1,4 @@
-# Computer Vision w Aplikacjach Mobilnych
+# Wizja komputerowa w aplikacjach mobilnych
 
 Wizja komputerowa na urządzeniach mobilnych umożliwia detekcję obiektów, segmentację, klasyfikację i rozpoznawanie tekstu — bez internetu, z niskim opóźnieniem. Kluczem jest wybór właściwego modelu i optymalizacja pod ograniczenia sprzętowe urządzenia.
 

@@ -1,4 +1,4 @@
-# Gesty i Interakcje Dotykowe
+# Gesty i interakcje dotykowe
 
 Ekran dotykowy to główny interfejs urządzenia mobilnego. Dobrze zaprojektowane gesty są intuicyjne i niedostrzegalne — użytkownik po prostu robi to, co chce, bez zastanawiania się nad mechaniką.
 
