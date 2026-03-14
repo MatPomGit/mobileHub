@@ -1704,6 +1704,11 @@
                 Wykłady - Zaliczenie teorii
                 <span class="tab-badge">Nowe</span>
             </button>
+            <button class="tab-btn" data-tab="pierwsza" id="tab-pierwsza">
+                <i class="fa-solid fa-rocket"></i>
+                Moja pierwsza aplikacja
+                <span class="tab-badge">Nowe</span>
+            </button>
             <button class="tab-btn" data-tab="materialy" id="tab-materialy">
                 <i class="fa-solid fa-file-arrow-down"></i>
                 Materiały
@@ -2338,6 +2343,17 @@
             </div>
         </div>
     </div><!-- /panel-egzamin -->
+
+    <!-- TAB PANEL: MOJA PIERWSZA APLIKACJA -->
+    <div class="tab-panel" id="panel-pierwsza">
+        <iframe
+            id="iframe-pierwsza"
+            src="pierwsza-aplikacja.html"
+            style="border:none; width:100%; display:block;"
+            title="Moja pierwsza aplikacja — przewodnik krok po kroku"
+            onload="this.style.height=(this.contentWindow.document.body.scrollHeight+40)+'px'">
+        </iframe>
+    </div><!-- /panel-pierwsza -->
 
     <!-- TAB PANEL: MATERIAŁY -->
     <div class="tab-panel" id="panel-materialy">
