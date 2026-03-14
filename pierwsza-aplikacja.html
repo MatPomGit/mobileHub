@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja pierwsza aplikacja — Przewodnik PAM</title>
+    <meta name="description"
+        content="Praktyczny przewodnik tworzenia pierwszej aplikacji mobilnej krok po kroku — od wymagań do publikacji w Google Play.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:           #f4f6fb;
+            --surface:      #ffffff;
+            --surface2:     #f0f2f8;
+            --border:       #e2e6f0;
+            --text:         #1a1d2e;
+            --text-muted:   #6b7280;
+            --accent:       #5b4fcf;
+            --accent2:      #7c3aed;
+            --accent-light: #ede9fe;
+            --accent-glow:  rgba(91, 79, 207, 0.15);
+            --green:        #10b981;
+            --green-light:  #d1fae5;
+            --amber:        #f59e0b;
+            --amber-light:  #fef3c7;
+            --red:          #ef4444;
+            --red-light:    #fee2e2;
+            --blue:         #3b82f6;
+            --blue-light:   #dbeafe;
+            --code-bg:      #1e1e2e;
+            --radius:       12px;
+            --radius-sm:    8px;
+            --shadow:       0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg:    0 8px 40px rgba(0,0,0,0.12);
+            --font:         'Outfit', sans-serif;
+            --mono:         'JetBrains Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ===== PAGE WRAPPER ===== */
+        .page-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* ===== PAGE HEADER ===== */
+        .page-hero {
+            background: linear-gradient(135deg, #5b4fcf 0%, #7c3aed 100%);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 40px 40px 36px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 200px; height: 200px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 50%;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px; left: 60px;
+            width: 160px; height: 160px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .page-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .page-hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .page-hero p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .hero-stat i { font-size: 15px; }
+
+        /* ===== INTRO NOTE ===== */
+        .intro-note {
+            background: var(--blue-light);
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid var(--blue);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-bottom: 36px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .intro-note i { color: var(--blue); margin-top: 2px; flex-shrink: 0; }
+        .intro-note p { margin: 0; font-size: 14px; color: var(--text); }
+        .intro-note strong { color: var(--blue); }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 40px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            border-radius: 2px;
+        }
+
+        /* ===== STEP CARD ===== */
+        .step-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 28px 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            font-size: 16px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .step-title-block { flex: 1; }
+
+        .step-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 6px;
+        }
+
+        .step-tag.green  { background: var(--green-light);  color: #065f46; }
+        .step-tag.amber  { background: var(--amber-light);  color: #78350f; }
+        .step-tag.purple { background: var(--accent-light); color: #4c1d95; }
+        .step-tag.blue   { background: var(--blue-light);   color: #1e40af; }
+        .step-tag.red    { background: var(--red-light);    color: #991b1b; }
+
+        .step-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .step-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .step-meta span {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .step-meta i { font-size: 11px; }
+
+        .step-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.65;
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .checklist li i {
+            color: var(--accent);
+            margin-top: 2px;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .checklist li.required i { color: var(--green); }
+        .checklist li.bonus   i { color: var(--amber); }
+
+        /* ===== CODE BLOCK ===== */
+        .code-block {
+            background: var(--code-bg);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin: 14px 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: var(--mono);
+            font-size: 13px;
+            color: #a9b7c6;
+            line-height: 1.6;
+            white-space: pre;
+        }
+
+        .code-block .code-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #7c8ca0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-family: var(--mono);
+        }
+
+        /* ===== HINT / WARNING ===== */
+        .hint-box, .warn-box, .tip-box {
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            margin: 14px 0;
+            display: flex;
+            gap: 12px;
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        .hint-box { background: var(--green-light); border-left: 4px solid var(--green); }
+        .warn-box { background: var(--amber-light); border-left: 4px solid var(--amber); }
+        .tip-box  { background: var(--accent-light); border-left: 4px solid var(--accent); }
+
+        .hint-box i { color: var(--green); margin-top: 2px; flex-shrink: 0; }
+        .warn-box i { color: var(--amber); margin-top: 2px; flex-shrink: 0; }
+        .tip-box  i { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+
+        .hint-box div, .warn-box div, .tip-box div { flex: 1; }
+        .hint-box strong, .warn-box strong, .tip-box strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* ===== SUB-STEPS ===== */
+        .sub-steps {
+            margin: 14px 0 0;
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sub-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13.5px;
+            color: var(--text);
+            line-height: 1.55;
+        }
+
+        .sub-step-dot {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ===== MINI TABLE ===== */
+        .mini-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            margin: 14px 0;
+        }
+
+        .mini-table th {
+            background: var(--surface2);
+            color: var(--text);
+            font-weight: 700;
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .mini-table td {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            vertical-align: top;
+            color: var(--text);
+        }
+
+        .mini-table tr:nth-child(even) td { background: var(--surface2); }
+
+        /* ===== DIVIDER ===== */
+        .phase-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 36px 0 28px;
+        }
+
+        .phase-divider-label {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .phase-divider-line {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            border-radius: 2px;
+        }
+
+        /* ===== SUMMARY BOX ===== */
+        .summary-box {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 32px 32px 28px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .summary-box h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .summary-box p {
+            opacity: 0.9;
+            font-size: 14px;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .summary-counts {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin: 22px 0 0;
+            flex-wrap: wrap;
+        }
+
+        .summary-count {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .summary-count strong {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .summary-count span {
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        /* ===== TWO-COL GRID ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 14px 0;
+        }
+
+        @media (max-width: 600px) {
+            .two-col { grid-template-columns: 1fr; }
+            .page-hero h1 { font-size: 1.5rem; }
+            .page-hero { padding: 28px 24px 24px; }
+            .step-card { padding: 20px 18px; }
+            .summary-box { padding: 24px 20px; }
+        }
+
+        /* ===== ROLE BADGE ===== */
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 2px 9px;
+            border-radius: 20px;
+            border: 1px solid currentColor;
+        }
+
+        .role-badge.lead   { color: #7c3aed; background: var(--accent-light); }
+        .role-badge.dev    { color: #065f46; background: var(--green-light); }
+        .role-badge.devops { color: #1e40af; background: var(--blue-light); }
+
+        /* ===== LINK ===== */
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover { text-decoration: underline; }
+
+        /* ===== HIGHLIGHT ===== */
+        mark {
+            background: var(--amber-light);
+            color: #78350f;
+            border-radius: 3px;
+            padding: 1px 4px;
+            font-weight: 600;
+        }
+
+        code {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1px 6px;
+            color: var(--accent2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <!-- ===== PAGE HERO ===== -->
+        <div class="page-hero">
+            <div class="page-hero-badge">
+                <i class="fa-solid fa-rocket"></i>
+                Przewodnik laboratoryjny
+            </div>
+            <h1>Moja pierwsza aplikacja mobilna</h1>
+            <p>Praktyczny, krok-po-kroku przewodnik prowadzący Cię przez cały cykl produkcji aplikacji — od pierwszego
+                pomysłu aż po publikację w Google Play.</p>
+            <div class="hero-stats">
+                <div class="hero-stat"><i class="fa-solid fa-list-check"></i> 16 kroków</div>
+                <div class="hero-stat"><i class="fa-solid fa-users"></i> Zespół 3-osobowy</div>
+                <div class="hero-stat"><i class="fa-brands fa-android"></i> Android / Flutter</div>
+                <div class="hero-stat"><i class="fa-solid fa-calendar-check"></i> Semestr letni</div>
+            </div>
+        </div>
+
+        <!-- ===== INTRO NOTE ===== -->
+        <div class="intro-note">
+            <i class="fa-solid fa-circle-info fa-lg"></i>
+            <p>Ten przewodnik opisuje <strong>konkretne czynności</strong>, które musisz wykonać, żeby ukończyć projekt
+                semestralny z Laboratorium PAM i uzyskać zaliczenie. Każdy krok zawiera listę zadań,
+                wskazówki oraz wymagania, które będą oceniane. Czytaj i realizuj zadania <strong>w podanej
+                kolejności</strong>.</p>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             FAZA 1 — PLANOWANIE
+        ════════════════════════════════════════ -->
+        <div class="phase-divider">
+            <div class="phase-divider-label">
+                <i class="fa-solid fa-compass-drafting"></i> Faza 1 — Planowanie
+            </div>
+            <div class="phase-divider-line"></div>
+        </div>
+
+        <!-- KROK 1 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title-block">
+                    <span class="step-tag purple"><i class="fa-solid fa-lightbulb"></i> Start</span>
+                    <h3>Wybór tematu, platformy i składu zespołu</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~1–2 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Przed Lab 4</span>
+                        <span><span class="role-badge lead"><i class="fa-solid fa-crown"></i> Product Lead</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Zanim napiszesz pierwszą linię kodu, musisz wiedzieć: <em>co budujesz</em>, <em>dla kogo</em> i
+                <em>w jakiej technologii</em>. Poniższe decyzje podejmij razem z zespołem.
+            </p>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Ustal skład zespołu (dokładnie <strong>3 osoby</strong>) i przypisz role:
+                        <span class="role-badge lead">Product Lead &amp; UX</span>
+                        <span class="role-badge dev">Frontend Developer</span>
+                        <span class="role-badge devops">Backend &amp; DevOps</span>
+                    </span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Wybierz temat aplikacji — musi ona <mark>realnie wykorzystywać możliwości smartfona</mark>
+                        (np. GPS, aparat, sensory), a nie być prostą wersją aplikacji webowej.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Wybierz platformę: <strong>Android (Kotlin + Jetpack Compose)</strong>, <strong>Flutter</strong>
+                        lub inną uzgodnioną z prowadzącym.</span>
+                </li>
+                <li><i class="fa-solid fa-circle-arrow-right"></i>
+                    <span>Zidentyfikuj grupę docelową użytkowników i ich główny problem, który rozwiązujesz.</span>
+                </li>
+                <li><i class="fa-solid fa-circle-arrow-right"></i>
+                    <span>Zapisz listę co najmniej <strong>5 kluczowych funkcjonalności</strong> (MVP)
+                        i odrębną listę funkcji dodatkowych (nice-to-have).</span>
+                </li>
+            </ul>
+
+            <div class="tip-box">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <div>
+                    <strong>Wskazówka</strong>
+                    Dobry temat to taki, w którym aplikacja bez smartfona (czyli np. jako strona internetowa na
+                    komputerze) <em>straciłaby sens</em>. Przykład: aplikacja do skanowania paragonów z aparatu
+                    — bez aparatu byłaby bezużyteczna.
+                </div>
+            </div>
+        </div>
+
+        <!-- KROK 2 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title-block">
+                    <span class="step-tag green"><i class="fa-solid fa-file-lines"></i> Wymagany dokument</span>
+                    <h3>Dokument wymagań funkcjonalnych (SRS / User Stories)</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~3–5 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Lab 4 — termin zgłoszenia</span>
+                        <span><span class="role-badge lead"><i class="fa-solid fa-crown"></i> Product Lead</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                SRS (Software Requirements Specification) to podstawowy dokument każdego projektu programistycznego.
+                Opisuje <em>co</em> system ma robić, nie <em>jak</em>. W projekcie PAM zastępują go
+                <strong>User Stories z kryteriami akceptacji</strong>.
+            </p>
+
+            <p class="step-desc" style="margin-bottom:10px;"><strong>Struktura dokumentu SRS / User Stories:</strong></p>
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div><span><strong>Cel projektu</strong> — 1 zdanie opisujące problem i rozwiązanie.</span></li>
+                <li><div class="sub-step-dot">2</div><span><strong>Persony użytkowników</strong> — 2–3 opisy typowego użytkownika.</span></li>
+                <li><div class="sub-step-dot">3</div><span><strong>User Stories</strong> — min. 15, każda w formacie:
+                    <code>Jako [rola] chcę [funkcja] aby [korzyść]</code>.</span></li>
+                <li><div class="sub-step-dot">4</div><span><strong>Kryteria akceptacji</strong> dla każdej historyjki (kiedy uznajemy ją za "zrobioną").</span></li>
+                <li><div class="sub-step-dot">5</div><span><strong>Lista ekranów</strong> — tytuł + krótki opis każdego ekranu (min. 5).</span></li>
+                <li><div class="sub-step-dot">6</div><span><strong>Wymagania niefunkcjonalne</strong> — wydajność, bezpieczeństwo, dostępność.</span></li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Przykład User Story z kryteriami akceptacji</div>
+                <pre>US-07: Jako zalogowany użytkownik chcę dodać nowe zadanie do listy,
+        aby móc śledzić swoje obowiązki.
+
+Kryteria akceptacji:
+  ✓ Formularz zawiera pole: tytuł (wymagane), opis, termin, priorytet
+  ✓ Po zapisaniu zadanie pojawia się natychmiast na liście
+  ✓ Walidacja: tytuł nie może być pusty (komunikat błędu)
+  ✓ Zadanie jest persystowane lokalnie (działa offline)</pre>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Napisz min. <strong>15 User Stories</strong> w Google Docs / Markdown / Notion.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Każda User Story musi mieć min. 3 kryteria akceptacji.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Uzasadnij <strong>dlaczego aplikacja wymaga smartfona</strong> (jakie natywne funkcje i dlaczego).</span>
+                </li>
+                <li><i class="fa-solid fa-circle-arrow-right"></i>
+                    <span>Opisz zakres MVP (co musi działać na prezentacji) vs. funkcje dodatkowe.</span>
+                </li>
+            </ul>
+
+            <div class="warn-box">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                    <strong>Ważne — termin</strong>
+                    Dokument SRS / User Stories musisz zaprezentować prowadzącemu na <strong>Laboratorium nr 4</strong>.
+                    Bez zaakceptowanego tematu nie możesz kontynuować projektu.
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             FAZA 2 — ŚRODOWISKO I REPOZYTORIUM
+        ════════════════════════════════════════ -->
+        <div class="phase-divider">
+            <div class="phase-divider-label">
+                <i class="fa-solid fa-gear"></i> Faza 2 — Środowisko i repozytorium
+            </div>
+            <div class="phase-divider-line"></div>
+        </div>
+
+        <!-- KROK 3 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title-block">
+                    <span class="step-tag blue"><i class="fa-brands fa-github"></i> GitHub</span>
+                    <h3>Konfiguracja repozytorium GitHub</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~1 godzina</span>
+                        <span><i class="fa-solid fa-calendar"></i> Dzień 1 projektu</span>
+                        <span><span class="role-badge devops"><i class="fa-solid fa-server"></i> DevOps</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Repozytorium GitHub to centralne miejsce pracy całego zespołu. Prawidłowa konfiguracja
+                od początku uchroni Was przed konfliktami i problemami z historią commitów.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Zaloguj się na <a href="https://github.com" target="_blank">github.com</a> i kliknij
+                        <strong>New repository</strong>. Ustaw widoczność na <strong>Private</strong> lub
+                        <strong>Public</strong> (uzgodnij z prowadzącym). Zaznacz <em>"Add README"</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Dodaj współpracowników: <em>Settings → Collaborators → Add people</em> i dodaj
+                        pozostałych członków zespołu po nazwie użytkownika.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Utwórz <strong>branch protection rule</strong> dla gałęzi <code>main</code>:
+                        <em>Settings → Branches → Add rule</em>. Zaznacz
+                        <em>"Require a pull request before merging"</em> i
+                        <em>"Require status checks to pass before merging"</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Utwórz dwa milestone'y:
+                        <em>Issues → Milestones → New milestone</em>:
+                        <strong>Sprint 1 — Lab 4–6</strong> (MVP) i
+                        <strong>Sprint 2 — Lab 7–8</strong> (finalny).</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Utwórz projekt Kanban w GitHub Projects: <em>Projects → New project</em> (Board view)
+                        z kolumnami: <em>Backlog / In Progress / In Review / Done</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">6</div>
+                    <span>Utwórz pierwsze Issues na podstawie User Stories (min. 10 na start). Przypisz je
+                        do odpowiednich osób i milestone'ów.</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Zalecana struktura branchy (Git Flow)</div>
+                <pre>main          ← tylko stabilny, przetestowany kod
+develop       ← integracja zmian od wszystkich developerów
+feature/xxx   ← nowa funkcja (np. feature/login-screen)
+fix/xxx       ← poprawka błędu
+release/x.y   ← przygotowanie wydania</pre>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Repozytorium założone, wszyscy członkowie zespołu mają dostęp.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Branch protection na <code>main</code> — wymagany PR i review przed merge.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>2 milestone'y (Sprint 1 i Sprint 2) skonfigurowane.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Projektu zaliczony wymaga <mark>min. 20 zamkniętych Issues</mark>.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 4 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title-block">
+                    <span class="step-tag green"><i class="fa-solid fa-screwdriver-wrench"></i> Setup</span>
+                    <h3>Konfiguracja środowiska programistycznego</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~2–3 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Dzień 1 projektu</span>
+                        <span><span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Zanim napiszesz kod, musisz zainstalować i skonfigurować odpowiednie narzędzia.
+                Ten krok wykonuje każdy developer w zespole na swoim komputerze.
+            </p>
+
+            <table class="mini-table">
+                <thead>
+                    <tr>
+                        <th>Platforma</th>
+                        <th>IDE</th>
+                        <th>SDK / narzędzia</th>
+                        <th>Wymagania sprzętowe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Android (Kotlin)</strong></td>
+                        <td>Android Studio Hedgehog+</td>
+                        <td>JDK 17, Android SDK 34+, Emulator</td>
+                        <td>8 GB RAM (16 GB zalecane), 8 GB dysk</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Flutter</strong></td>
+                        <td>VS Code / Android Studio</td>
+                        <td>Flutter SDK 3.x, Dart, Android SDK</td>
+                        <td>8 GB RAM, 10 GB dysk</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Backend (Node.js)</strong></td>
+                        <td>VS Code / IntelliJ</td>
+                        <td>Node.js 20+, npm/yarn, Docker</td>
+                        <td>4 GB RAM</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Pobierz i zainstaluj <a href="https://developer.android.com/studio" target="_blank">Android Studio</a>.
+                        Podczas pierwszego uruchomienia kreator zainstaluje SDK i emulator.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Skonfiguruj emulator: <em>Device Manager → Create Virtual Device</em>.
+                        Wybierz Pixel 7 Pro z systemem Android 14 (API 34).</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Zainstaluj Git: <a href="https://git-scm.com/downloads" target="_blank">git-scm.com</a>.
+                        Skonfiguruj nazwę i e-mail:
+                        <code>git config --global user.name "Imię Nazwisko"</code></span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Sklonuj repozytorium: <code>git clone https://github.com/TEAM/REPO.git</code></span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Utwórz gałąź developerską: <code>git checkout -b develop</code> i wypchnij ją na GitHub:
+                        <code>git push -u origin develop</code></span>
+                </li>
+            </ul>
+
+            <div class="hint-box">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <div>
+                    <strong>Fizyczne urządzenie (zalecane)</strong>
+                    Do finałowej prezentacji potrzebujesz fizycznego smartfona z Androidem.
+                    Włącz <em>Opcje deweloperskie</em> (7× kliknij Numer kompilacji w Ustawieniach)
+                    i aktywuj <em>USB Debugging</em>.
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             FAZA 3 — PROJEKT I ARCHITEKTURA
+        ════════════════════════════════════════ -->
+        <div class="phase-divider">
+            <div class="phase-divider-label">
+                <i class="fa-solid fa-pen-ruler"></i> Faza 3 — Projekt i architektura
+            </div>
+            <div class="phase-divider-line"></div>
+        </div>
+
+        <!-- KROK 5 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <div class="step-title-block">
+                    <span class="step-tag purple"><i class="fa-solid fa-object-group"></i> UI/UX</span>
+                    <h3>Projekt UI/UX w Figma — wireframy i prototyp</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~4–6 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Lab 5 — termin oddania</span>
+                        <span><span class="role-badge lead"><i class="fa-solid fa-crown"></i> Product Lead</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Prototyp w Figma pozwala "przetestować" UI bez pisania kodu. Oszczędza to czas —
+                poprawki layoutu w Figmie zajmują minuty, a w kodzie — godziny.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Utwórz konto na <a href="https://figma.com" target="_blank">figma.com</a> (bezpłatne).
+                        Stwórz nowy plik projektu i udostępnij go całemu zespołowi.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Użyj ramki <strong>Android Small (360×800)</strong> jako bazy dla każdego ekranu.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Zaprojektuj min. <strong>5 ekranów</strong>: ekran powitalny/logowania, ekran główny,
+                        widok szczegółów, formularz dodawania/edycji, ustawienia/profil.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Zdefiniuj system kolorów: kolor główny (Primary), pomocniczy (Secondary),
+                        tło, kolor tekstu. Zachowaj kontrast min. 4.5:1 dla tekstu (WCAG AA).</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Dodaj połączenia między ekranami (<em>Prototype</em> mode w Figmie)
+                        i zaprezentuj interaktywny flow na Lab 5.</span>
+                </li>
+            </ul>
+
+            <div class="two-col">
+                <div class="hint-box" style="margin:0;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div>
+                        <strong>Zasoby Figmy dla Androida</strong>
+                        Wyszukaj w Community: <em>"Material 3 Design Kit"</em> — gotowe komponenty Androida.
+                    </div>
+                </div>
+                <div class="warn-box" style="margin:0;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>Gesty mobilne</strong>
+                        Zaplanuj interakcje gestami (swipe, long-press, pull-to-refresh) — to odróżnia aplikację mobilną od webowej.
+                    </div>
+                </div>
+            </div>
+
+            <ul class="checklist" style="margin-top:14px;">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Min. <strong>5 ekranów</strong> zaprojektowanych w Figmie z prototypem nawigacji.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Zdefiniowany system kolorów i typografia (max. 2 fonty).</span>
+                </li>
+                <li><i class="fa-solid fa-circle-arrow-right"></i>
+                    <span>Przygotowane materiały promocyjne (screeny do Google Play) — optymalnie 1080×1920 px.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 6 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <div class="step-title-block">
+                    <span class="step-tag green"><i class="fa-solid fa-layer-group"></i> Architektura</span>
+                    <h3>Szkielet projektu i architektura MVVM</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~2–3 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Po Lab 4</span>
+                        <span><span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Architektura MVVM (Model-View-ViewModel) to standard w aplikacjach Android. Rozdziela logikę
+                biznesową od interfejsu użytkownika — kod jest testowalny i łatwy w utrzymaniu.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>W Android Studio kliknij <em>New Project → Empty Activity (Compose)</em>.
+                        Ustaw <em>Package name</em> (np. <code>pl.prz.pam.taskmaster</code>),
+                        minSdk: 26, targetSdk: 34.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Utwórz strukturę pakietów odpowiadającą warstwom MVVM:</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Zalecana struktura pakietów</div>
+                <pre>com.example.app/
+├── data/
+│   ├── local/          ← Room DAO, Database, entities
+│   ├── remote/         ← Retrofit API, DTOs
+│   └── repository/     ← implementacje repozytoriów
+├── domain/
+│   ├── model/          ← modele domenowe
+│   └── usecase/        ← logika biznesowa
+├── ui/
+│   ├── screens/        ← Composables dla każdego ekranu
+│   │   ├── home/
+│   │   ├── detail/
+│   │   └── settings/
+│   ├── components/     ← reużywalne komponenty UI
+│   ├── navigation/     ← NavGraph
+│   └── theme/          ← kolory, typografia, kształty
+└── di/                 ← Hilt / Koin modules</pre>
+            </div>
+
+            <ul class="sub-steps" style="margin-top:12px;">
+                <li><div class="sub-step-dot">3</div>
+                    <span>Dodaj zależności do <code>build.gradle.kts</code>:
+                        <em>Hilt</em> (DI), <em>Navigation Compose</em>, <em>Room</em>,
+                        <em>Retrofit</em>, <em>Coil</em> (obrazy), <em>ViewModel Compose</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Stwórz pierwszy commit na gałęzi <code>feature/project-setup</code>
+                        i otwórz Pull Request do <code>develop</code>.</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Przykładowy ViewModel (Kotlin + Compose)</div>
+                <pre>@HiltViewModel
+class TaskViewModel @Inject constructor(
+    private val taskRepository: TaskRepository
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(TaskUiState())
+    val uiState: StateFlow&lt;TaskUiState&gt; = _uiState.asStateFlow()
+
+    fun loadTasks() {
+        viewModelScope.launch {
+            taskRepository.getTasks().collect { tasks ->
+                _uiState.update { it.copy(tasks = tasks, isLoading = false) }
+            }
+        }
+    }
+}</pre>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             FAZA 4 — IMPLEMENTACJA
+        ════════════════════════════════════════ -->
+        <div class="phase-divider">
+            <div class="phase-divider-label">
+                <i class="fa-solid fa-code"></i> Faza 4 — Implementacja
+            </div>
+            <div class="phase-divider-line"></div>
+        </div>
+
+        <!-- KROK 7 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">7</div>
+                <div class="step-title-block">
+                    <span class="step-tag blue"><i class="fa-solid fa-compass"></i> Nawigacja</span>
+                    <h3>Implementacja nawigacji i ekranów</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~6–10 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 1</span>
+                        <span><span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Nawigacja to "szkielet" aplikacji łączący wszystkie ekrany. W Jetpack Compose używamy
+                <strong>Navigation Compose</strong> — deklaratywnego systemu opartego o NavController.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Zdefiniuj sealed class lub enum ze wszystkimi trasami (routes) nawigacji.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Stwórz <code>AppNavGraph</code> — composable z <code>NavHost</code>
+                        i wszystkimi <code>composable { }</code> destinacjami.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Zaimplementuj każdy ekran jako osobny Composable w osobnym pliku.
+                        Ekran główny, lista, szczegóły, formularz, ustawienia.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Dodaj bottom navigation bar lub navigation drawer dla głównych sekcji.</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Obsłuż przycisk Wstecz (Back Handler) i poprawne zarządzanie back stackiem.</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Szkielet NavGraph (Jetpack Compose)</div>
+                <pre>@Composable
+fun AppNavGraph(navController: NavHostController) {
+    NavHost(navController, startDestination = Screen.Home.route) {
+        composable(Screen.Home.route) {
+            HomeScreen(onNavigateToDetail = { id ->
+                navController.navigate(Screen.Detail.createRoute(id))
+            })
+        }
+        composable(
+            Screen.Detail.route,
+            arguments = listOf(navArgument("id") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getLong("id") ?: return@composable
+            DetailScreen(itemId = id, onBack = { navController.popBackStack() })
+        }
+    }
+}</pre>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Min. <strong>5 ekranów</strong> z działającą nawigacją między nimi.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Stany UI: <mark>Loading / Content / Empty / Error</mark> — każdy ekran obsługuje te stany.</span>
+                </li>
+                <li><i class="fa-solid fa-circle-arrow-right"></i>
+                    <span>Obsługa stanu offline (wyświetlenie stosownego komunikatu lub danych z cache'u).</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 8 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">8</div>
+                <div class="step-title-block">
+                    <span class="step-tag green"><i class="fa-solid fa-database"></i> Dane lokalne</span>
+                    <h3>Lokalna baza danych (Room)</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~3–5 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 1</span>
+                        <span><span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Room to ORM (Object-Relational Mapper) dla SQLite na Androidzie. Umożliwia
+                przechowywanie danych lokalnie — aplikacja działa offline i jest szybsza.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Dodaj zależność <code>room-runtime</code>, <code>room-ktx</code>
+                        i <code>room-compiler</code> do <code>build.gradle.kts</code>.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Stwórz klasy <code>@Entity</code> dla każdej tabeli (np. <code>TaskEntity</code>).</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Stwórz interfejsy <code>@Dao</code> z metodami
+                        <code>@Insert</code>, <code>@Update</code>, <code>@Delete</code>, <code>@Query</code>.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Stwórz klasę <code>@Database</code> rozszerzającą <code>RoomDatabase</code>.
+                        Użyj <code>Room.databaseBuilder()</code> w module Hilt.</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Zaimplementuj klasę <code>Repository</code> łączącą Room z resztą aplikacji
+                        (ViewModel nie powinien znać Room bezpośrednio).</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Przykładowa encja i DAO</div>
+                <pre>@Entity(tableName = "tasks")
+data class TaskEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val title: String,
+    val description: String,
+    val isDone: Boolean = false,
+    val createdAt: Long = System.currentTimeMillis()
+)
+
+@Dao
+interface TaskDao {
+    @Query("SELECT * FROM tasks ORDER BY createdAt DESC")
+    fun getAllTasks(): Flow&lt;List&lt;TaskEntity&gt;&gt;
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTask(task: TaskEntity): Long
+
+    @Delete
+    suspend fun deleteTask(task: TaskEntity)
+}</pre>
+            </div>
+        </div>
+
+        <!-- KROK 9 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">9</div>
+                <div class="step-title-block">
+                    <span class="step-tag blue"><i class="fa-solid fa-network-wired"></i> Backend i API</span>
+                    <h3>Backend, uwierzytelnianie i integracja z API</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~8–15 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 1–2</span>
+                        <span>
+                            <span class="role-badge devops"><i class="fa-solid fa-server"></i> DevOps</span>
+                            <span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Backend zapewnia serwer, bazę danych i API, z którym komunikuje się aplikacja mobilna.
+                Możesz zbudować własny backend (Node.js, Spring Boot, Django) lub skorzystać z
+                gotowej usługi (Firebase, Supabase).
+            </p>
+
+            <table class="mini-table">
+                <thead>
+                    <tr><th>Opcja backendu</th><th>Zalety</th><th>Wady</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Firebase (Google)</strong></td>
+                        <td>Szybki start, brak konfiguracji serwera, auth gotowy</td>
+                        <td>Uzależnienie od usługi, ograniczone darmowe limity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Node.js + Express</strong></td>
+                        <td>Pełna kontrola, łatwy do nauki</td>
+                        <td>Trzeba skonfigurować hosting</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supabase</strong></td>
+                        <td>Open-source Firebase, PostgreSQL, REST auto-generated</td>
+                        <td>Nowa platforma, mniejsza dokumentacja</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span><strong>(Backend)</strong> Zaimplementuj min. <strong>5 endpointów REST</strong>:
+                        rejestracja, logowanie, oraz min. 3 operacje CRUD na głównych danych.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span><strong>(Backend)</strong> Dodaj uwierzytelnianie JWT lub OAuth.
+                        Hashuj hasła (bcrypt). Chroń wszystkie prywatne endpointy middleware'em auth.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span><strong>(Backend)</strong> Udokumentuj API przy użyciu
+                        <a href="https://swagger.io" target="_blank">Swagger / OpenAPI</a>.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span><strong>(Frontend)</strong> Dodaj Retrofit + OkHttp do projektu Android.
+                        Stwórz interfejs API i klas DTOs.</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span><strong>(Frontend)</strong> Przechowuj tokeny bezpiecznie w
+                        <code>EncryptedSharedPreferences</code> lub Keystore,
+                        nigdy w zwykłych SharedPreferences.</span>
+                </li>
+                <li><div class="sub-step-dot">6</div>
+                    <span><strong>(Frontend)</strong> Obsłuż błędy sieciowe:
+                        brak internetu, timeout, 401 (odświeżenie tokenu), 5xx (komunikat dla użytkownika).</span>
+                </li>
+                <li><div class="sub-step-dot">7</div>
+                    <span><strong>(DevOps)</strong> Wdróż backend na serwerze publicznym
+                        (np. Railway, Render, Heroku, VPS). API musi być dostępne z zewnątrz.</span>
+                </li>
+            </ul>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Min. <strong>5 endpointów API</strong> (w tym auth: rejestracja + logowanie).</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Działający przepływ end-to-end: <mark>logowanie → operacja domenowa → wynik</mark>.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Bezpieczne przechowywanie tokenów (nie w plaintext).</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 10 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">10</div>
+                <div class="step-title-block">
+                    <span class="step-tag amber"><i class="fa-solid fa-mobile-screen-button"></i> Natywne</span>
+                    <h3>Natywne funkcje urządzenia</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~4–8 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 2</span>
+                        <span><span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                To wyróżnik aplikacji mobilnej — funkcje dostępne <em>tylko</em> na smartfonie.
+                Musisz zaimplementować co najmniej <strong>2 natywne funkcje</strong>.
+            </p>
+
+            <div class="two-col">
+                <div>
+                    <p style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text);">
+                        <i class="fa-solid fa-star" style="color:var(--amber);"></i> Wymagane (min. 2 z listy):
+                    </p>
+                    <ul class="checklist">
+                        <li class="bonus"><i class="fa-solid fa-location-dot"></i>
+                            <span>GPS / lokalizacja (FusedLocationProvider)</span>
+                        </li>
+                        <li class="bonus"><i class="fa-solid fa-camera"></i>
+                            <span>Aparat (CameraX API)</span>
+                        </li>
+                        <li class="bonus"><i class="fa-solid fa-bell"></i>
+                            <span>Powiadomienia push / lokalne</span>
+                        </li>
+                        <li class="bonus"><i class="fa-solid fa-microchip"></i>
+                            <span>Sensory (akcelerometr, żyroskop)</span>
+                        </li>
+                        <li class="bonus"><i class="fa-solid fa-fingerprint"></i>
+                            <span>Biometria (odcisk palca / Face Unlock)</span>
+                        </li>
+                        <li class="bonus"><i class="fa-brands fa-bluetooth"></i>
+                            <span>Bluetooth / BLE</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text);">
+                        <i class="fa-solid fa-shield-halved" style="color:var(--accent);"></i> Obowiązkowe kroki:
+                    </p>
+                    <ul class="sub-steps">
+                        <li><div class="sub-step-dot">1</div>
+                            <span>Zadeklaruj uprawnienia w <code>AndroidManifest.xml</code>.</span>
+                        </li>
+                        <li><div class="sub-step-dot">2</div>
+                            <span>Poproś o uprawnienia w runtime (nie tylko w manifest).</span>
+                        </li>
+                        <li><div class="sub-step-dot">3</div>
+                            <span>Obsłuż przypadek odmowy uprawnień przez użytkownika (graceful degradation).</span>
+                        </li>
+                        <li><div class="sub-step-dot">4</div>
+                            <span>Przetestuj na fizycznym urządzeniu (emulator często nie symuluje sensorów).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             FAZA 5 — JAKOŚĆ I TESTY
+        ════════════════════════════════════════ -->
+        <div class="phase-divider">
+            <div class="phase-divider-label">
+                <i class="fa-solid fa-vial"></i> Faza 5 — Jakość i testy
+            </div>
+            <div class="phase-divider-line"></div>
+        </div>
+
+        <!-- KROK 11 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">11</div>
+                <div class="step-title-block">
+                    <span class="step-tag green"><i class="fa-solid fa-flask"></i> Testy</span>
+                    <h3>Testy jednostkowe i integracyjne</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~4–6 godzin</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 1–2, równolegle z implementacją</span>
+                        <span>
+                            <span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span>
+                            <span class="role-badge devops"><i class="fa-solid fa-server"></i> DevOps</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Testy zapewniają, że kod działa poprawnie i że przyszłe zmiany niczego nie psują.
+                Wymagane są testy jednostkowe frontendu (≥60% pokrycia logiki)
+                oraz testy integracyjne API (min. 5 scenariuszy).
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span><strong>(Android)</strong> Piszesz testy do katalogu <code>test/</code>
+                        (testy jednostkowe JVM). Użyj JUnit4 + MockK/Mockito do mockowania zależności.
+                        Testuj <em>ViewModele</em>, <em>UseCases</em>, <em>Repozytoria</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Uruchom testy: <em>Run → All Tests</em> w Android Studio lub
+                        <code>./gradlew test</code> w terminalu.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Sprawdź pokrycie kodu: <em>Run → Run with Coverage</em>.
+                        Cel: <mark>≥60% pokrycia klas logiki</mark>.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span><strong>(Backend)</strong> Napisz min. <strong>5 testów integracyjnych API</strong>
+                        (np. Supertest dla Node.js, pytest dla Python).
+                        Testuj: rejestrację, logowanie, CRUD, obsługę błędów.</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">Przykładowy test jednostkowy ViewModelu (Kotlin)</div>
+                <pre>@ExperimentalCoroutinesApi
+class TaskViewModelTest {
+    @get:Rule val mainCoroutineRule = MainCoroutineRule()
+
+    private val mockRepository: TaskRepository = mockk()
+    private lateinit var viewModel: TaskViewModel
+
+    @Before
+    fun setup() {
+        every { mockRepository.getTasks() } returns flowOf(listOf(fakeTask))
+        viewModel = TaskViewModel(mockRepository)
+    }
+
+    @Test
+    fun `loadTasks emits tasks in uiState`() = runTest {
+        viewModel.loadTasks()
+        val state = viewModel.uiState.first()
+        assertEquals(1, state.tasks.size)
+        assertEquals("Test Task", state.tasks[0].title)
+    }
+}</pre>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Min. <strong>10 testów jednostkowych</strong> na frontendzie (ViewModel / UseCase / Repository).</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Min. <strong>5 testów integracyjnych</strong> backendu API.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Pokrycie kodu logiki <mark>≥60%</mark>.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 12 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">12</div>
+                <div class="step-title-block">
+                    <span class="step-tag blue"><i class="fa-solid fa-rotate"></i> CI/CD</span>
+                    <h3>Konfiguracja CI/CD z GitHub Actions</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~2–3 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 1 — jak najwcześniej</span>
+                        <span><span class="role-badge devops"><i class="fa-solid fa-server"></i> DevOps</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                CI/CD (Continuous Integration / Continuous Delivery) automatycznie uruchamia build i testy
+                przy każdym Pull Requeście. Dzięki temu błędy są wykrywane natychmiast.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>W repozytorium utwórz plik:
+                        <code>.github/workflows/android-ci.yml</code></span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Skonfiguruj workflow tak, aby przy każdym PR do <code>develop</code> lub <code>main</code>
+                        uruchamiał: build projektu i testy jednostkowe.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Dodaj badge CI do pliku <code>README.md</code>.</span>
+                </li>
+            </ul>
+
+            <div class="code-block">
+                <div class="code-label">.github/workflows/android-ci.yml</div>
+                <pre>name: Android CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Run unit tests
+        run: ./gradlew test --no-daemon</pre>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>GitHub Actions workflow uruchamia się automatycznie przy każdym PR.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Build i testy muszą przejść przed merge do <code>main</code>.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             FAZA 6 — PUBLIKACJA
+        ════════════════════════════════════════ -->
+        <div class="phase-divider">
+            <div class="phase-divider-label">
+                <i class="fa-solid fa-upload"></i> Faza 6 — Publikacja i dokumentacja
+            </div>
+            <div class="phase-divider-line"></div>
+        </div>
+
+        <!-- KROK 13 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">13</div>
+                <div class="step-title-block">
+                    <span class="step-tag amber"><i class="fa-solid fa-key"></i> Build</span>
+                    <h3>Podpisany build APK / AAB</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~1–2 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 2</span>
+                        <span><span class="role-badge dev"><i class="fa-solid fa-code"></i> Frontend Dev</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Każda aplikacja Android musi być podpisana cyfrowo przed dystrybucją. Google Play wymaga
+                formatu AAB (Android App Bundle). Keystore to Twój "podpis deweloperski" —
+                <strong>przechowuj go bezpiecznie i nigdy nie wrzucaj do repozytorium!</strong>
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>W Android Studio: <em>Build → Generate Signed Bundle / APK</em>.
+                        Wybierz <em>Android App Bundle</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Kliknij <em>Create new keystore</em>. Wypełnij dane (alias, hasło, dane organizacji).
+                        Zapisz plik <code>.jks</code> w <strong>bezpiecznym miejscu poza repozytorium</strong>.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Skonfiguruj podpisywanie automatyczne w <code>build.gradle.kts</code>
+                        (hasła z zmiennych środowiskowych lub <code>local.properties</code>).</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Ustaw <code>versionCode</code> i <code>versionName</code> w <code>build.gradle.kts</code>
+                        (np. versionCode 1, versionName "1.0.0").</span>
+                </li>
+            </ul>
+
+            <div class="warn-box">
+                <i class="fa-solid fa-lock"></i>
+                <div>
+                    <strong>Bezpieczeństwo keystore</strong>
+                    Plik <code>.jks</code> i hasła dodaj do <code>.gitignore</code>.
+                    Jeśli stracisz keystore, nie będziesz mógł aktualizować aplikacji w Google Play!
+                    Trzymaj kopię zapasową w bezpiecznym miejscu (np. zaszyfrowany plik w chmurze).
+                </div>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Wygenerowany podpisany <strong>AAB lub APK</strong> gotowy do dystrybucji.</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Keystore <strong>nie jest</strong> w repozytorium (<code>.gitignore</code>).</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 14 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">14</div>
+                <div class="step-title-block">
+                    <span class="step-tag purple"><i class="fa-solid fa-book"></i> Dokumentacja</span>
+                    <h3>Dokumentacja projektu</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~3–4 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 2 — przed prezentacją</span>
+                        <span><span class="role-badge lead"><i class="fa-solid fa-crown"></i> Product Lead</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Dobra dokumentacja to znak profesjonalnego projektu. Jest oceniana i wymagana do publikacji
+                w Google Play. Nie zostawiaj jej na ostatnią chwilę.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span><strong>README.md</strong> w repozytorium: opis aplikacji, screenshoty,
+                        instrukcja uruchomienia, technologie, struktura projektu, badge CI.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span><strong>Dokumentacja API (OpenAPI/Swagger)</strong>: każdy endpoint z metodą HTTP,
+                        parametrami, przykładowym requestem i responsem, kodami błędów.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span><strong>Polityka prywatności</strong>: wymagana przez Google Play. Opisz
+                        jakie dane zbierasz, jak je przetwarzasz i jak użytkownik może je usunąć.
+                        Użyj generatora: <a href="https://app-privacy-policy-generator.nisrulz.com" target="_blank">app-privacy-policy-generator</a></span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span><strong>Changelog</strong> (<code>CHANGELOG.md</code>): lista zmian w każdej wersji.
+                        Format: <a href="https://keepachangelog.com" target="_blank">keepachangelog.com</a>.</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span><strong>Instrukcja użytkownika</strong>: krótki przewodnik jak korzystać z aplikacji
+                        (może być częścią README lub osobnym plikiem).</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 15 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">15</div>
+                <div class="step-title-block">
+                    <span class="step-tag green"><i class="fa-brands fa-google-play"></i> Google Play</span>
+                    <h3>Publikacja w Google Play Store</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> ~2–3 godziny</span>
+                        <span><i class="fa-solid fa-calendar"></i> Sprint 2 — przed Lab 8</span>
+                        <span><span class="role-badge lead"><i class="fa-solid fa-crown"></i> Product Lead</span>
+                            <span class="role-badge devops"><i class="fa-solid fa-server"></i> DevOps</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Publikacja w Google Play to finał projektu. Wymaga jednorazowej opłaty rejestracyjnej
+                (25 USD) i weryfikacji konta. Możesz opublikować na kanale testowym (Internal Testing)
+                — nie wymaga pełnego przeglądu Google.
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Zarejestruj konto <strong>Google Play Developer</strong> na
+                        <a href="https://play.google.com/console" target="_blank">play.google.com/console</a>
+                        (jednorazowa opłata 25 USD). Weryfikacja może potrwać do 48h.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Utwórz nową aplikację w Play Console: <em>Create app</em>.
+                        Wybierz kategorię, język, typ (free/paid).</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Wypełnij <strong>store listing</strong>: krótki opis (80 znaków),
+                        pełny opis (4000 znaków), 2–8 screenshotów (min. 1080×1920),
+                        ikona 512×512 px, baner graficzny (1024×500 px).</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Wgraj podpisane AAB do kanału <em>Internal Testing</em>:
+                        <em>Testing → Internal testing → Create new release</em>.</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Dodaj adresy e-mail testerów (w tym prowadzącego) do listy testerów.</span>
+                </li>
+                <li><div class="sub-step-dot">6</div>
+                    <span>Opublikuj release — link do wersji testowej dostarcz prowadzącemu.</span>
+                </li>
+            </ul>
+
+            <div class="hint-box">
+                <i class="fa-solid fa-circle-info"></i>
+                <div>
+                    <strong>Kanał Internal Testing vs. Production</strong>
+                    Internal Testing nie wymaga recenzji ze strony Google i jest dostępny natychmiast.
+                    Wystarczy do zaliczenia projektu. Publikacja na Production może potrwać kilka dni.
+                </div>
+            </div>
+
+            <ul class="checklist">
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>AAB przesłany do Google Play (kanał Internal Testing lub wyższy).</span>
+                </li>
+                <li class="required"><i class="fa-solid fa-circle-check"></i>
+                    <span>Przygotowane materiały: screenshoty, ikona, opisy (krótki + pełny), polityka prywatności.</span>
+                </li>
+                <li><i class="fa-solid fa-circle-arrow-right"></i>
+                    <span>Link do wersji testowej przekazany prowadzącemu (do weryfikacji).</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- KROK 16 -->
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">16</div>
+                <div class="step-title-block">
+                    <span class="step-tag purple"><i class="fa-solid fa-presentation-screen"></i> Prezentacja</span>
+                    <h3>Prezentacja projektu na Lab 8</h3>
+                    <div class="step-meta">
+                        <span><i class="fa-solid fa-clock"></i> 10–15 minut prezentacji</span>
+                        <span><i class="fa-solid fa-calendar"></i> Laboratoria nr 8 — ostatnie lub przedostatnie zajęcia</span>
+                        <span>Cały zespół</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="step-desc">
+                Ostatni krok — zaprezentowanie gotowej aplikacji prowadzącemu.
+                Prezentacja powinna pokazać zarówno produkt (demo aplikacji), jak i proces (GitHub, CI/CD).
+            </p>
+
+            <ul class="sub-steps">
+                <li><div class="sub-step-dot">1</div>
+                    <span>Przygotuj <strong>5-minutowe demo</strong> na fizycznym urządzeniu Android.
+                        Pokaż działające funkcje: nawigację, CRUD, auth, native features.</span>
+                </li>
+                <li><div class="sub-step-dot">2</div>
+                    <span>Przejdź przez <strong>repozytorium GitHub</strong>: struktura branchy,
+                        zamknięte Issues, Pull Requesty z code review, milestony.</span>
+                </li>
+                <li><div class="sub-step-dot">3</div>
+                    <span>Pokaż <strong>pipeline CI/CD</strong> — zielony status Actions na ostatnim PR.</span>
+                </li>
+                <li><div class="sub-step-dot">4</div>
+                    <span>Zaprezentuj stronę aplikacji w <strong>Google Play Console</strong>
+                        lub link do Internal Testing.</span>
+                </li>
+                <li><div class="sub-step-dot">5</div>
+                    <span>Oddaj <strong>kod źródłowy</strong> (link do repo) i
+                        <strong>dokumentację</strong> (README, API docs, politykę prywatności).</span>
+                </li>
+            </ul>
+
+            <div class="hint-box">
+                <i class="fa-solid fa-trophy"></i>
+                <div>
+                    <strong>Klucz do dobrej oceny</strong>
+                    Stabilna, działająca aplikacja > efektowna ale niedokończona.
+                    Priorytetuj niezawodność podstawowych funkcji nad
+                    liczbą dodatkowych ficzerów.
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SUMMARY ===== -->
+        <div class="summary-box">
+            <h2><i class="fa-solid fa-flag-checkered"></i> Jesteś gotowy — powodzenia!</h2>
+            <p>Jeśli ukończyłeś wszystkie 16 kroków, Twoja aplikacja jest gotowa do zaliczenia.
+                Projekt semestralny PAM to realne doświadczenie produkcji oprogramowania mobilnego —
+                umiejętności, które będą cenne w Twojej karierze.</p>
+            <div class="summary-counts">
+                <div class="summary-count"><strong>16</strong><span>kroków</span></div>
+                <div class="summary-count"><strong>15+</strong><span>User Stories</span></div>
+                <div class="summary-count"><strong>5+</strong><span>ekranów</span></div>
+                <div class="summary-count"><strong>20+</strong><span>Issues GitHub</span></div>
+                <div class="summary-count"><strong>10+</strong><span>testów</span></div>
+                <div class="summary-count"><strong>1</strong><span>publikacja Google Play</span></div>
+            </div>
+        </div>
+
+    </div><!-- /page-wrapper -->
+</body>
+</html>

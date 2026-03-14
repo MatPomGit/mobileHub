@@ -1704,6 +1704,11 @@
                 Wykłady - Zaliczenie teorii
                 <span class="tab-badge">Nowe</span>
             </button>
+            <button class="tab-btn" data-tab="pierwsza" id="tab-pierwsza">
+                <i class="fa-solid fa-rocket"></i>
+                Moja pierwsza aplikacja
+                <span class="tab-badge">Nowe</span>
+            </button>
             <button class="tab-btn" data-tab="materialy" id="tab-materialy">
                 <i class="fa-solid fa-file-arrow-down"></i>
                 Materiały
@@ -2339,6 +2344,17 @@
         </div>
     </div><!-- /panel-egzamin -->
 
+    <!-- TAB PANEL: MOJA PIERWSZA APLIKACJA -->
+    <div class="tab-panel" id="panel-pierwsza">
+        <iframe
+            id="iframe-pierwsza"
+            src="pierwsza-aplikacja.html"
+            style="border:none; width:100%; display:block; min-height:600px;"
+            title="Moja pierwsza aplikacja — przewodnik krok po kroku"
+            onload="(function(f){var h=f.contentWindow.document.body.scrollHeight;f.style.height=(h>400?h+40:800)+'px';})(this)">
+        </iframe>
+    </div><!-- /panel-pierwsza -->
+
     <!-- TAB PANEL: MATERIAŁY -->
     <div class="tab-panel" id="panel-materialy">
         <div class="info-panel">
@@ -2411,6 +2427,22 @@
                 // Show/hide panels
                 document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
                 document.getElementById('panel-' + tab)?.classList.add('active');
+
+                // Resize "pierwsza" iframe once its panel is visible
+                if (tab === 'pierwsza') {
+                    const iframe = document.getElementById('iframe-pierwsza');
+                    if (iframe) {
+                        const resize = () => {
+                            const h = iframe.contentWindow?.document?.body?.scrollHeight;
+                            if (h && h > 100) { iframe.style.height = (h + 40) + 'px'; }
+                        };
+                        if (iframe.contentWindow?.document?.readyState === 'complete') {
+                            resize();
+                        } else {
+                            iframe.addEventListener('load', resize, { once: true });
+                        }
+                    }
+                }
 
                 // Show/hide sidebar toggle (only for wiki panel)
                 const sidebarToggle = document.getElementById('sidebarToggle');
