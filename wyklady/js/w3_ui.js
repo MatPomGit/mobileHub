@@ -156,7 +156,7 @@ function ns() { return ++slideNum; }
     x: 0.45, y: 0.45, w: 5.5, h: 0.35,
     fontSize: 11, bold: true, color: C.accent1, fontFace: "Calibri", charSpacing: 4
   });
-  s.addText("Projektowanie\nUI/UX dla\nUrządzeń Mobilnych", {
+  s.addText("Projektowanie\nUI/UX dla\nurządzeń mobilnych", {
     x: 0.45, y: 0.85, w: 6.5, h: 2.8,
     fontSize: 36, bold: true, color: C.white, fontFace: "Calibri"
   });
@@ -164,7 +164,7 @@ function ns() { return ++slideNum; }
     x: 0.45, y: 3.7, w: 1.5, h: 0.05,
     fill: { color: C.accent1 }, line: { color: C.accent1 }
   });
-  s.addText("Programowanie Aplikacji Mobilnych — Studia Magisterskie", {
+  s.addText("Programowanie Aplikacji Mobilnych", {
     x: 0.45, y: 3.85, w: 6, h: 0.26,
     fontSize: 11, color: C.subtitle, fontFace: "Calibri"
   });
@@ -213,7 +213,7 @@ function ns() { return ++slideNum; }
 {
   const n = ns();
   const s = darkSlide();
-  addSectionTitle(s, "Zakres Prezentacji", C.accent1);
+  addSectionTitle(s, "Zakres prezentacji", C.accent1);
   // Two columns of 5 topics each
   const left = [
     ["01", "Wprowadzenie do UI/UX", "Definicje, ewolucja, specyfika mobilna"],
@@ -297,7 +297,7 @@ function ns() { return ++slideNum; }
 {
   const n = ns();
   const s = darkSlide();
-  addSectionTitle(s, "01 • Definicja UI i UX — Różnice i Zależności", C.accent1);
+  addSectionTitle(s, "01 • Definicja, różnice i zależności pomiędzy UI i UX", C.accent1);
 
   // Two large cards
   // UI card
@@ -402,10 +402,10 @@ function ns() { return ++slideNum; }
 {
   const n = ns();
   const s = darkSlide();
-  addSectionTitle(s, "01 • Ewolucja Projektowania Mobilnego", C.accent1);
+  addSectionTitle(s, "01 • Ewolucja projektowania mobilnego", C.accent1);
 
   const eras = [
-    { year: "1990s–2006", title: "Era Przedsmartfonowa", body: "Telefony z fizycznymi klawiaturami, małe ekrany. Nokia, Motorola — proste menu tekstowe i ikonowe. Ograniczone możliwości interfejsu.", color: C.accent5 },
+    { year: "1990s–2006", title: "Era przedsmartfonowa", body: "Telefony z fizycznymi klawiaturami, małe ekrany. Nokia, Motorola — proste menu tekstowe i ikonowe. Ograniczone możliwości interfejsu.", color: C.accent5 },
     { year: "2007", title: "Rewolucja iPhone", body: "Wielodotykowy ekran, gesty, nowa era projektowania dotykowego. Początek skeuomorfizmu — elementy imitujące realne obiekty.", color: C.accent1 },
     { year: "2014", title: "Material Design", body: "Google wprowadza Material Design — jednolity język wizualny dla Android. Flat design, cienie, animacje jako informacja.", color: C.accent3 },
     { year: "2020+", title: "Współczesność", body: "Neumorfizm, Dark Mode, AI-driven design, personalizacja, dostępność jako priorytet. Design Systems i automatyzacja.", color: C.accent2 },
@@ -452,12 +452,12 @@ function ns() { return ++slideNum; }
 {
   const n = ns();
   const s = darkSlide();
-  addSectionTitle(s, "01 • Specyfika Projektowania dla Urządzeń Mobilnych", C.accent1);
+  addSectionTitle(s, "01 • Specyfika Projektowania dla urządzeń mobilnych", C.accent1);
 
   const cards = [
-    { title: "Ograniczona Przestrzeń", body: "Ekrany 4–7 cali wymagają priorytetyzacji treści i minimalistycznego podejścia. Mniej miejsca = większa odpowiedzialność projektanta.", color: C.accent1 },
-    { title: "Interakcje Dotykowe", body: "Projektowanie pod palce, nie kursor. Precyzja dotykowa jest niższa — wymaga większych celów min. 44-48px i odpowiednich odstępów.", color: C.accent2 },
-    { title: "Zmienne Warunki", body: "Użytkownicy korzystają w ruchu, w słońcu, w deszczu. Interfejs musi być czytelny w każdych warunkach środowiskowych.", color: C.accent3 },
+    { title: "Ograniczona przestrzeń", body: "Ekrany 4–7 cali wymagają priorytetyzacji treści i minimalistycznego podejścia. Mniej miejsca = większa odpowiedzialność projektanta.", color: C.accent1 },
+    { title: "Interakcje dotykowe", body: "Projektowanie pod palce, nie kursor. Precyzja dotykowa jest niższa — wymaga większych celów min. 44-48px i odpowiednich odstępów.", color: C.accent2 },
+    { title: "Zmienne warunki", body: "Użytkownicy korzystają w ruchu, w słońcu, w deszczu. Interfejs musi być czytelny w każdych warunkach środowiskowych.", color: C.accent3 },
   ];
 
   cards.forEach((card, i) => {
@@ -473,7 +473,7 @@ function ns() { return ++slideNum; }
     x: 0.3, y: 4.0, w: 0.07, h: 1.12,
     fill: { color: C.accent4 }, line: { color: C.accent4 }
   });
-  s.addText("Kontekst Użycia", {
+  s.addText("Kontekst użycia", {
     x: 0.45, y: 4.05, w: 4.1, h: 0.28,
     fontSize: 12, bold: true, color: C.white, fontFace: "Calibri", margin: 0
   });
@@ -490,7 +490,7 @@ function ns() { return ++slideNum; }
     x: 5.2, y: 4.0, w: 0.07, h: 1.12,
     fill: { color: C.accent5 }, line: { color: C.accent5 }
   });
-  s.addText("Fragmentacja Urządzeń", {
+  s.addText("Fragmentacja urządzeń", {
     x: 5.35, y: 4.05, w: 4.1, h: 0.28,
     fontSize: 12, bold: true, color: C.white, fontFace: "Calibri", margin: 0
   });
