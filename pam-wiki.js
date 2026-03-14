@@ -154,28 +154,60 @@ const CATEGORIES = [
 ];
 
 // ---- INIT ----
-document.addEventListener('DOMContentLoaded', () => waitForMarked());
+document.addEventListener('DOMContentLoaded', () => {
+    initThemePicker();
+    initScrollProgress();
+    waitForMarked();
+});
 
 function waitForMarked(attempts = 0) {
-    if (typeof marked !== 'undefined') { initWiki(); initDarkMode(); initScrollProgress(); }
+    if (typeof marked !== 'undefined') { initWiki(); }
     else if (attempts < 20) setTimeout(() => waitForMarked(attempts + 1), 200);
 }
 
-function initDarkMode() {
-    const btn = document.getElementById('darkModeToggle');
+const VALID_THEMES = ['light', 'dark', 'ocean', 'forest', 'sunset', 'rose'];
+
+function initThemePicker() {
     const saved = localStorage.getItem('pam-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', saved);
-    updateDarkIcon(saved);
-    btn?.addEventListener('click', () => {
-        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('pam-theme', next);
-        updateDarkIcon(next);
+    const theme = VALID_THEMES.includes(saved) ? saved : 'light';
+    applyTheme(theme);
+
+    const pickerBtn = document.getElementById('themePickerBtn');
+    const dropdown = document.getElementById('themeDropdown');
+    const pickerContainer = document.getElementById('themePicker');
+
+    pickerBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = dropdown.classList.contains('open');
+        dropdown.classList.toggle('open', !isOpen);
+        pickerBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!pickerContainer?.contains(e.target)) {
+            dropdown?.classList.remove('open');
+            pickerBtn?.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const t = btn.dataset.theme;
+            if (VALID_THEMES.includes(t)) {
+                applyTheme(t);
+                localStorage.setItem('pam-theme', t);
+                dropdown?.classList.remove('open');
+                pickerBtn?.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
 }
-function updateDarkIcon(t) {
-    const i = document.querySelector('#darkModeToggle i');
-    if (i) i.className = t === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+
+function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === t);
+    });
 }
 
 function initScrollProgress() {
