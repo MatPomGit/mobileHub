@@ -4,7 +4,6 @@ Kamera w urządzeniu mobilnym nie jest wyłącznie „modułem do robienia zdję
 
 Na Androidzie rekomendowaną warstwą wysokiego poziomu jest CameraX, a na iOS i iPadOS rolę podstawowego frameworka pełni AVFoundation. Oba podejścia rozwiązują ten sam problem: jak bezpiecznie, wydajnie i przewidywalnie sterować zasobem sprzętowym, który jest jednocześnie kosztowny energetycznie, silnie zależny od możliwości urządzenia i wyjątkowo wrażliwy na błędy synchronizacji oraz zarządzania pamięcią.
 
-Ten materiał rozwija temat na poziomie akademickim. Obejmuje architekturę CameraX i AVFoundation, uzasadnienia projektowe, aspekty wydajnościowe, praktyczne przykłady kodu oraz kilka ciekawostek, które pomagają zrozumieć, dlaczego nowoczesne API kamer wyglądają właśnie tak, a nie inaczej.
 
 ---
 
