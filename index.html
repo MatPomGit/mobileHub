@@ -60,8 +60,81 @@
             --accent2: #a78bfa;
             --accent-light: #1e1a3a;
             --accent-glow: rgba(124, 109, 240, 0.2);
+            --header-bg: #0a0b14;
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
             --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Ocean — dark blue theme */
+        [data-theme="ocean"] {
+            --bg: #071726;
+            --surface: #0d2137;
+            --surface2: #102840;
+            --border: #1a3a55;
+            --text: #d0eaff;
+            --text-muted: #7aadcc;
+            --accent: #0ea5e9;
+            --accent2: #38bdf8;
+            --accent-light: #0c2a3d;
+            --accent-glow: rgba(14, 165, 233, 0.2);
+            --code-bg: #071726;
+            --header-bg: #040f1a;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Forest — green theme */
+        [data-theme="forest"] {
+            --bg: #f0fdf4;
+            --surface: #ffffff;
+            --surface2: #dcfce7;
+            --border: #bbf7d0;
+            --text: #14532d;
+            --text-muted: #4b7a5f;
+            --accent: #059669;
+            --accent2: #10b981;
+            --accent-light: #d1fae5;
+            --accent-glow: rgba(5, 150, 105, 0.15);
+            --code-bg: #0d2818;
+            --header-bg: #052e16;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Sunset — warm orange/red dark theme */
+        [data-theme="sunset"] {
+            --bg: #1a0e08;
+            --surface: #271409;
+            --surface2: #321a0b;
+            --border: #4a2510;
+            --text: #fde8d0;
+            --text-muted: #b88060;
+            --accent: #f97316;
+            --accent2: #fb923c;
+            --accent-light: #3a1800;
+            --accent-glow: rgba(249, 115, 22, 0.25);
+            --code-bg: #12080a;
+            --header-bg: #100804;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Rose — pink/magenta light theme */
+        [data-theme="rose"] {
+            --bg: #fff0f6;
+            --surface: #ffffff;
+            --surface2: #ffe4ef;
+            --border: #fbc8de;
+            --text: #4a0628;
+            --text-muted: #9d5070;
+            --accent: #db2777;
+            --accent2: #ec4899;
+            --accent-light: #fce7f3;
+            --accent-glow: rgba(219, 39, 119, 0.15);
+            --code-bg: #2d0a1c;
+            --header-bg: #3b0a21;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
         }
 
         /* ===== RESET & BASE ===== */
@@ -202,11 +275,89 @@
             letter-spacing: 0.5px;
         }
 
+        /* ===== THEME PICKER ===== */
+        .theme-picker {
+            position: relative;
+        }
+
+        .theme-picker-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--nav-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 200;
+            min-width: 160px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .theme-picker-dropdown.open {
+            display: flex;
+        }
+
+        .theme-picker-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 2px 8px 6px;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 10px;
+            border-radius: 8px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--nav-text);
+            transition: all var(--transition);
+            white-space: nowrap;
+            width: 100%;
+            text-align: left;
+        }
+
+        .theme-option:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .theme-option.active {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .theme-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .theme-swatch.light   { background: linear-gradient(135deg, #f4f6fb, #5b4fcf); }
+        .theme-swatch.dark    { background: linear-gradient(135deg, #0d0f1a, #7c6df0); }
+        .theme-swatch.ocean   { background: linear-gradient(135deg, #071726, #0ea5e9); }
+        .theme-swatch.forest  { background: linear-gradient(135deg, #f0fdf4, #059669); }
+        .theme-swatch.sunset  { background: linear-gradient(135deg, #1a0e08, #f97316); }
+        .theme-swatch.rose    { background: linear-gradient(135deg, #fff0f6, #db2777); }
+
         /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, rgba(13,15,26,0.80) 0%, rgba(26,16,64,0.80) 50%, rgba(13,26,46,0.80) 100%),
                 url('assets/background_4.jpg') center/cover no-repeat;
-            padding: 28px 24px 24px;
+            padding: 14px 24px 12px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -233,21 +384,21 @@
             background: rgba(91, 79, 207, 0.2);
             border: 1px solid rgba(91, 79, 207, 0.4);
             color: #a78bfa;
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .hero h1 {
-            font-size: clamp(20px, 3vw, 30px);
+            font-size: clamp(16px, 2.5vw, 24px);
             font-weight: 800;
             color: #fff;
-            line-height: 1.15;
-            margin-bottom: 6px;
+            line-height: 1.2;
+            margin-bottom: 4px;
         }
 
         .hero h1 span {
@@ -1328,7 +1479,7 @@
 
         @media (max-width: 480px) {
             .hero {
-                padding: 40px 16px;
+                padding: 10px 12px 8px;
             }
 
             .hero-stats {
@@ -1344,8 +1495,21 @@
             }
 
             .tab-btn {
-                padding: 12px 14px;
-                font-size: 13px;
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .header-title span {
+                display: none;
+            }
+
+            .header-badge {
+                display: none;
+            }
+
+            .theme-picker-dropdown {
+                right: 0;
+                left: auto;
             }
         }
 
@@ -1474,9 +1638,32 @@
             </div>
             <div class="header-actions">
                 <span class="header-badge">KIA · PRz</span>
-                <button class="btn-icon" id="darkModeToggle" title="Zmień motyw" aria-label="Toggle dark mode">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
+                <div class="theme-picker" id="themePicker">
+                    <button class="btn-icon" id="themePickerBtn" title="Zmień motyw" aria-label="Wybierz motyw kolorystyczny" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa-solid fa-palette"></i>
+                    </button>
+                    <div class="theme-picker-dropdown" id="themeDropdown" role="menu">
+                        <div class="theme-picker-label">Motyw</div>
+                        <button class="theme-option" data-theme="light" role="menuitem">
+                            <span class="theme-swatch light"></span>Jasny
+                        </button>
+                        <button class="theme-option" data-theme="dark" role="menuitem">
+                            <span class="theme-swatch dark"></span>Ciemny
+                        </button>
+                        <button class="theme-option" data-theme="ocean" role="menuitem">
+                            <span class="theme-swatch ocean"></span>Ocean
+                        </button>
+                        <button class="theme-option" data-theme="forest" role="menuitem">
+                            <span class="theme-swatch forest"></span>Las
+                        </button>
+                        <button class="theme-option" data-theme="sunset" role="menuitem">
+                            <span class="theme-swatch sunset"></span>Zachód słońca
+                        </button>
+                        <button class="theme-option" data-theme="rose" role="menuitem">
+                            <span class="theme-swatch rose"></span>Różany
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
