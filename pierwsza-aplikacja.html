@@ -583,7 +583,7 @@
         ════════════════════════════════════════ -->
         <div class="phase-divider">
             <div class="phase-divider-label">
-                <i class="fa-solid fa-compass-drafting"></i> Faza 1 — Planowanie
+                <i class="fa-solid fa-compass-drafting"></i> Faza 1 - Planowanie
             </div>
             <div class="phase-divider-line"></div>
         </div>
@@ -718,7 +718,7 @@ Kryteria akceptacji:
         ════════════════════════════════════════ -->
         <div class="phase-divider">
             <div class="phase-divider-label">
-                <i class="fa-solid fa-gear"></i> Faza 2 — Środowisko i repozytorium
+                <i class="fa-solid fa-gear"></i> Faza 2 - Środowisko i repozytorium
             </div>
             <div class="phase-divider-line"></div>
         </div>
@@ -762,8 +762,8 @@ Kryteria akceptacji:
                 <li><div class="sub-step-dot">4</div>
                     <span>Utwórz dwa milestone'y:
                         <em>Issues → Milestones → New milestone</em>:
-                        <strong>Sprint 1 — Lab 4–6</strong> (MVP) i
-                        <strong>Sprint 2 — Lab 7–8</strong> (finalny).</span>
+                        <strong>Sprint 1: Lab 4–6</strong> (MVP) i
+                        <strong>Sprint 2: Lab 7–8</strong> (finalny).</span>
                 </li>
                 <li><div class="sub-step-dot">5</div>
                     <span>Utwórz projekt Kanban w GitHub Projects: <em>Projects → New project</em> (Board view)
@@ -890,7 +890,7 @@ release/x.y   ← przygotowanie wydania</pre>
         ════════════════════════════════════════ -->
         <div class="phase-divider">
             <div class="phase-divider-label">
-                <i class="fa-solid fa-pen-ruler"></i> Faza 3 — Projekt i architektura
+                <i class="fa-solid fa-pen-ruler"></i> Faza 3 - Projekt i architektura
             </div>
             <div class="phase-divider-line"></div>
         </div>
@@ -901,7 +901,7 @@ release/x.y   ← przygotowanie wydania</pre>
                 <div class="step-number">5</div>
                 <div class="step-title-block">
                     <span class="step-tag purple"><i class="fa-solid fa-object-group"></i> UI/UX</span>
-                    <h3>Projekt UI/UX w Figma — wireframy i prototyp</h3>
+                    <h3>Projekt UI/UX w Figma - wireframy i prototyp</h3>
                     <div class="step-meta">
                         <span><i class="fa-solid fa-clock"></i> ~4–6 godzin</span>
                         <span><i class="fa-solid fa-calendar"></i> Lab 5 — termin oddania</span>
@@ -1052,20 +1052,32 @@ class TaskViewModel @Inject constructor(
             </div>
         </div>
 
+        <!-- KROK 7 -->
+        <div class="step-card">
+            <div class="step-number">7</div>
+            <h3>Organizacja pracy na GitHub</h3>
+            <p>Zanim zaczniesz pisać kod, przygotuj fundamenty dla zespołu.</p>
+            <ul class="checklist">
+                <li><i class="fa-solid fa-check"></i> <span><strong>Branch Protection:</strong> Wymagaj Pull Requesta przed mergem do <code>main</code>.</span></li>
+                <li><i class="fa-solid fa-check"></i> <span><strong>Conventional Commits:</strong> Stosuj prefiksy <code>feat:</code>, <code>fix:</code>, <code>refactor:</code>.</span></li>
+                <li><i class="fa-solid fa-check"></i> <span><strong>PR Template:</strong> Stwórz plik <code>.github/pull_request_template.md</code> z opisem zmian i screenshotami UI.</span></li>
+            </ul>
+        </div>
+
         <!-- ════════════════════════════════════════
              FAZA 4 — IMPLEMENTACJA
         ════════════════════════════════════════ -->
         <div class="phase-divider">
             <div class="phase-divider-label">
-                <i class="fa-solid fa-code"></i> Faza 4 — Implementacja
+                <i class="fa-solid fa-code"></i> Faza 4 - Implementacja
             </div>
             <div class="phase-divider-line"></div>
         </div>
 
-        <!-- KROK 7 -->
+        <!-- KROK 8 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">7</div>
+                <div class="step-number">8</div>
                 <div class="step-title-block">
                     <span class="step-tag blue"><i class="fa-solid fa-compass"></i> Nawigacja</span>
                     <h3>Implementacja nawigacji i ekranów</h3>
@@ -1136,10 +1148,10 @@ fun AppNavGraph(navController: NavHostController) {
             </ul>
         </div>
 
-        <!-- KROK 8 -->
+        <!-- KROK 9 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">8</div>
+                <div class="step-number">9</div>
                 <div class="step-title-block">
                     <span class="step-tag green"><i class="fa-solid fa-database"></i> Dane lokalne</span>
                     <h3>Lokalna baza danych (Room)</h3>
@@ -1203,10 +1215,10 @@ interface TaskDao {
             </div>
         </div>
 
-        <!-- KROK 9 -->
+        <!-- KROK 10 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">9</div>
+                <div class="step-number">10</div>
                 <div class="step-title-block">
                     <span class="step-tag blue"><i class="fa-solid fa-network-wired"></i> Backend i API</span>
                     <h3>Backend, uwierzytelnianie i integracja z API</h3>
@@ -1295,10 +1307,10 @@ interface TaskDao {
             </ul>
         </div>
 
-        <!-- KROK 10 -->
+        <!-- KROK 11 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">10</div>
+                <div class="step-number">11</div>
                 <div class="step-title-block">
                     <span class="step-tag amber"><i class="fa-solid fa-mobile-screen-button"></i> Natywne</span>
                     <h3>Natywne funkcje urządzenia</h3>
@@ -1311,7 +1323,7 @@ interface TaskDao {
             </div>
 
             <p class="step-desc">
-                To wyróżnik aplikacji mobilnej — funkcje dostępne <em>tylko</em> na smartfonie.
+                To wyróżnik aplikacji mobilnej, funkcje dostępne <em>tylko</em> na smartfonie.
                 Musisz zaimplementować co najmniej <strong>2 natywne funkcje</strong>.
             </p>
 
@@ -1368,15 +1380,65 @@ interface TaskDao {
         ════════════════════════════════════════ -->
         <div class="phase-divider">
             <div class="phase-divider-label">
-                <i class="fa-solid fa-vial"></i> Faza 5 — Jakość i testy
+                <i class="fa-solid fa-vial"></i> Faza 5 - Jakość i testy
             </div>
             <div class="phase-divider-line"></div>
         </div>
 
-        <!-- KROK 11 -->
+        <!-- KROK 12 -->
+        <div class="section-title"><i class="fa-solid fa-comments"></i> Profesjonalne code review</div>
+        
+        <div class="step-card">
+            <div class="step-number">12</div>
+            <h3>Checklista dla reviewera</h3>
+            <p>Kiedy kolega/koleżanka wysyła Ci Pull Request, nie klikaj od razu "Approve". Sprawdź te 4 punkty:</p>
+            
+            <ul class="checklist">
+                <li><i class="fa-solid fa-magnifying-glass"></i> <span><strong>Hardcoded Strings:</strong> Czy napisy są w <code>strings.xml</code>? Nigdy nie wpisujemy tekstu "na sztywno" w kodzie Kotlin/Compose.</span></li>
+                <li><i class="fa-solid fa-magnifying-glass"></i> <span><strong>Architektura:</strong> Czy logika biznesowa jest w <code>ViewModel</code>, a UI tylko wyświetla dane?</span></li>
+                <li><i class="fa-solid fa-magnifying-glass"></i> <span><strong>Zasoby:</strong> Czy kolory używają kolorów z motywu (<code>MaterialTheme.colorScheme</code>), czy są wpisane jako <code>Color(0xFF...)</code>?</span></li>
+                <li><i class="fa-solid fa-magnifying-glass"></i> <span><strong>Obsługa błędów:</strong> Co się stanie, gdy użytkownik nie ma internetu lub baza danych jest pusta?</span></li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h3>Jak pisać komentarze w PR?</h3>
+            <p>Dobre Review pomaga budować lepszy produkt i lepszą atmosferę w zespole.</p>
+
+            <div class="comment-box comment-bad">
+                <strong><i class="fa-solid fa-xmark"></i> Zły komentarz (agresywny/niejasny):</strong><br>
+                "Zmień to, to jest źle napisane. Nie używamy tu pętli for."
+            </div>
+
+            <div class="comment-box comment-good">
+                <strong><i class="fa-solid fa-check"></i> Dobry komentarz (konstruktywny):</strong><br>
+                "W tym miejscu zamiast pętli <code>for</code> moglibyśmy użyć funkcji <code>.filter { ... }</code>. Kod byłby bardziej czytelny i zgodny z naszym stylem Kotlina. Co o tym sądzisz?"
+            </div>
+            
+            <div class="tip-box">
+                <strong>Wskazówka:</strong> Jeśli zmiana dotyczy wizualnej części aplikacji, Reviewer ma prawo poprosić o screenshota lub nagranie ekranu (GIF) w opisie PR. To oszczędza mnóstwo czasu!
+            </div>
+        </div>
+
+        <div class="step-card" style="border-top: 4px solid var(--accent);">
+            <h3>Słowniczek reviewera</h3>
+            <p>Możesz używać skrótów, aby przyspieszyć komunikację:</p>
+            <ul style="list-style: none; padding-left: 0; font-size: 14px;">
+                <li> <strong>Nit (Nits):</strong> Drobiazg, który nie blokuje merge'a (np. brakująca spacja).</li>
+                <li> <strong>Question:</strong> Pytanie o intencję autora, niekoniecznie sugestia zmiany.</li>
+                <li> <strong>Blocking:</strong> Błąd krytyczny, który musi być poprawiony przed mergem.</li>
+            </ul>
+        </div>
+
+        <div class="tip-box" style="text-align: center; background: var(--green-light); border: none;">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <strong>Pamiętaj:</strong> Code Review to nie egzamin, to wspólne dbanie o jakość. Najlepsze zespoły to takie, gdzie każdy uczy się od każdego!
+        </div>
+
+        <!-- KROK 13 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">11</div>
+                <div class="step-number">13</div>
                 <div class="step-title-block">
                     <span class="step-tag green"><i class="fa-solid fa-flask"></i> Testy</span>
                     <h3>Testy jednostkowe i integracyjne</h3>
@@ -1456,10 +1518,10 @@ class TaskViewModelTest {
             </ul>
         </div>
 
-        <!-- KROK 12 -->
+        <!-- KROK 14 --> Konfiguracja CI/CD z GitHub Actions</Konfiguracja>
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">12</div>
+                <div class="step-number">14</div>
                 <div class="step-title-block">
                     <span class="step-tag blue"><i class="fa-solid fa-rotate"></i> CI/CD</span>
                     <h3>Konfiguracja CI/CD z GitHub Actions</h3>
@@ -1489,7 +1551,7 @@ class TaskViewModelTest {
                     <span>Dodaj badge CI do pliku <code>README.md</code>.</span>
                 </li>
             </ul>
-
+            
             <div class="code-block">
                 <div class="code-label">.github/workflows/android-ci.yml</div>
                 <pre>name: Android CI
@@ -1526,10 +1588,27 @@ jobs:
                 <li class="required"><i class="fa-solid fa-circle-check"></i>
                     <span>GitHub Actions workflow uruchamia się automatycznie przy każdym PR.</span>
                 </li>
+
                 <li class="required"><i class="fa-solid fa-circle-check"></i>
                     <span>Build i testy muszą przejść przed merge do <code>main</code>.</span>
                 </li>
             </ul>
+            <p><small>Po każdym sukcesie w <strong>Actions</strong> znajdziesz gotowy plik APK do pobrania.</small></p>
+                    <div class="step-card">
+            <h3>Dlaczego to jest ważne?</h3>
+            <p>W profesjonalnych zespołach nikt nie wysyła APK "mailem". Dzięki GitHub Actions:</p>
+            <ol style="margin-left: 20px; color: var(--text-muted); font-size: 14px;">
+                <li>Zawsze masz pewność, że kod w gałęzi <code>main</code> jest poprawny.</li>
+                <li>Product Lead może pobrać najnowszą wersję aplikacji (APK) prosto z GitHuba, by pokazać ją prowadzącemu.</li>
+                <li>Eliminujesz problem "u mnie działa" — środowisko CI jest czyste i powtarzalne.</li>
+            </ol>
+        </div>
+
+        <div class="tip-box" style="text-align: center; background: var(--green-light); border: none;">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <strong>Protip na zaliczenie:</strong> Pokaż prowadzącemu zakładkę <strong>Insights -> Contributors</strong> na GitHubie oraz historię udanych buildów w <strong>Actions</strong>. To dowód na realną, systematyczną pracę zespołu!
+        </div>
+
         </div>
 
         <!-- ════════════════════════════════════════
@@ -1542,10 +1621,10 @@ jobs:
             <div class="phase-divider-line"></div>
         </div>
 
-        <!-- KROK 13 -->
+        <!-- KROK 15 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">13</div>
+                <div class="step-number">15</div>
                 <div class="step-title-block">
                     <span class="step-tag amber"><i class="fa-solid fa-key"></i> Build</span>
                     <h3>Podpisany build APK / AAB</h3>
@@ -1602,10 +1681,10 @@ jobs:
             </ul>
         </div>
 
-        <!-- KROK 14 -->
+        <!-- KROK 16 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">14</div>
+                <div class="step-number">16</div>
                 <div class="step-title-block">
                     <span class="step-tag purple"><i class="fa-solid fa-book"></i> Dokumentacja</span>
                     <h3>Dokumentacja projektu</h3>
@@ -1647,10 +1726,10 @@ jobs:
             </ul>
         </div>
 
-        <!-- KROK 15 -->
+        <!-- KROK 17 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">15</div>
+                <div class="step-number">17</div>
                 <div class="step-title-block">
                     <span class="step-tag green"><i class="fa-brands fa-google-play"></i> Google Play</span>
                     <h3>Publikacja w Google Play Store</h3>
@@ -1718,10 +1797,10 @@ jobs:
             </ul>
         </div>
 
-        <!-- KROK 16 -->
+        <!-- KROK 18 -->
         <div class="step-card">
             <div class="step-header">
-                <div class="step-number">16</div>
+                <div class="step-number">18</div>
                 <div class="step-title-block">
                     <span class="step-tag purple"><i class="fa-solid fa-presentation-screen"></i> Prezentacja</span>
                     <h3>Prezentacja projektu na Lab 8</h3>
@@ -1773,8 +1852,8 @@ jobs:
 
         <!-- ===== SUMMARY ===== -->
         <div class="summary-box">
-            <h2><i class="fa-solid fa-flag-checkered"></i> Jesteś gotowy — powodzenia!</h2>
-            <p>Jeśli ukończyłeś wszystkie 16 kroków, Twoja aplikacja jest gotowa do zaliczenia.
+            <h2><i class="fa-solid fa-flag-checkered"></i> Jesteś gotowy, powodzenia!</h2>
+            <p>Jeśli ukończyłeś wszystkie 18 kroków, Twoja aplikacja jest gotowa do zaliczenia.
                 Projekt semestralny PAM to realne doświadczenie produkcji oprogramowania mobilnego —
                 umiejętności, które będą cenne w Twojej karierze.</p>
             <div class="summary-counts">
